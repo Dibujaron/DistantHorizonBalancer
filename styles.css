@@ -1,0 +1,80 @@
+body {
+    background-image: url("img/background_flattened.png");
+    background-repeat: repeat;
+}
+
+.logo-img {
+    width: 128px;
+    height: 128px;
+}
+
+.hbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.vbox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mainbox {
+    margin-top: 100px
+}
+h1 {
+    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+    font-size: 48px;
+    color: white;
+    background-color: black;
+}
+
+h2 {
+    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+    font-size: 24x;
+    color: white;
+    background-color: black;
+
+}
+
+h3 {
+    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+    font-size: 18px;
+    color: white;
+    background-color: black;
+}
+
+h4 {
+    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+    font-size: 16px;
+    color: white;
+    background-color: black;
+}
+
+.dark {
+    background-color: black;
+}
+
+.monospace {
+  font-family: "Lucida Console", Courier, monospace;
+}
+
+.button {
+  width: 400px;
+  margin: 10px;
+  font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+  font-size: 24px;
+  text-align: center;
+  text-decoration: none;
+  background-color: #393740;
+  color: white;
+  padding: 2px 6px 2px 6px;
+  border: 1px solid #393740;
+  border-radius: 10px;
+}
+
+.button:hover {
+  background-color: #3269A8;
+  border: 1px solid #3269A8;
+}

@@ -1,16 +1,19 @@
 import os
-from flask import Flask, g, session, redirect, request, url_for, jsonify
+import configparser
+from flask import Flask, g, session, redirect, request, make_response, jsonify, render_template
 from requests_oauthlib import OAuth2Session
 
-OAUTH2_CLIENT_ID = '724995512587124777'
-OAUTH2_CLIENT_SECRET = 'ihVRhc5EgNRgIp7_QiLOJP8ekBFiUqf4'
-OAUTH2_REDIRECT_URI = 'http://localhost:5000/authresult'#'http://distant-horizon.io/authresult'
+config = configparser.ConfigParser()
+config.read('config.ini')
+OAUTH2_CLIENT_ID = config['OAUTH2']['ClientID']
+OAUTH2_CLIENT_SECRET = config['OAUTH2']['ClientSecret']
+OAUTH2_REDIRECT_URI = 'http://distant-horizon.io/authresult'
 
 API_BASE_URL = 'https://discordapp.com/api'
 AUTHORIZATION_BASE_URL = API_BASE_URL + '/oauth2/authorize'
 TOKEN_URL = API_BASE_URL + '/oauth2/token'
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='', static_folder='', static_url_path='')
 application = app #for passenger wsgi
 app.debug = True
 app.config['SECRET_KEY'] = OAUTH2_CLIENT_SECRET
@@ -39,10 +42,22 @@ def make_session(token=None, state=None, scope=None):
 
 @app.route('/')
 def index():
-    return redirect(url_for('.request_auth'))
+    if session.get('auth_choice_made') and session['auth_choice_made'] == True:
+        session['auth_choice_made'] = False
+        return render_template("Distant-Horizon.html")
+    else:
+        return render_template("Welcome.html")
     
-@app.route('/requestauth')
+@app.route('/quickplay')
+def quick_play():
+    session['auth_choice_made'] = True
+    return redirect('./')
+    
+@app.route('/authenticate')
 def request_auth():
+    if 'discord_token' in request.cookies:
+        session['auth_choice_made'] = True
+        return redirect('./')
     discord = make_session(scope=['identify'])
     authorization_url, state = discord.authorization_url(AUTHORIZATION_BASE_URL)
     session['oauth2_state'] = state
@@ -60,7 +75,10 @@ def auth_result():
         client_secret=OAUTH2_CLIENT_SECRET,
         authorization_response=request.url)
     session['oauth2_token'] = token
-    return redirect(url_for('.me'))
+    session['auth_choice_made'] = True
+    response = make_response(redirect('./'))
+    response.set_cookie('discord_token', str(token))
+    return response
 
 
 @app.route('/me')
