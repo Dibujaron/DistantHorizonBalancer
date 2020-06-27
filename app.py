@@ -80,7 +80,14 @@ def auth_result():
     response.set_cookie('discord_token', str(token))
     return response
 
+@app.route('/controls')
+def controls():
+    return render_template("Controls.html")
 
+@app.route('/about')
+def about():
+    return render_template("About.html")
+    
 @app.route('/me')
 def me():
     discord = make_session(token=session.get('oauth2_token'))

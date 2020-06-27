@@ -12,6 +12,11 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
+}
+
+.spacing {
+    padding: 5px;
 }
 
 .vbox {
@@ -20,20 +25,26 @@ body {
     align-items: center;
 }
 
+.controlsbox {
+    align-items: flex-start;
+    padding: 10px;
+}
+
 .mainbox {
     margin-top: 100px
 }
+
 h1 {
     font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
     font-size: 48px;
-    color: white;
+    color: gainsboro;
     background-color: black;
 }
 
 h2 {
     font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
     font-size: 24x;
-    color: white;
+    color: gainsboro;
     background-color: black;
 
 }
@@ -41,17 +52,24 @@ h2 {
 h3 {
     font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
     font-size: 18px;
-    color: white;
+    color: gainsboro;
     background-color: black;
 }
 
 h4 {
     font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
     font-size: 16px;
-    color: white;
+    color: gainsboro;
     background-color: black;
+    margin: 5px;
 }
 
+.token {
+  padding: 2px 6px 2px 6px;
+  background-color: #305c80;
+  border: 1px solid #305c80;
+  border-radius: 10px;
+}
 .dark {
     background-color: black;
 }
@@ -61,17 +79,20 @@ h4 {
 }
 
 .button {
-  width: 400px;
   margin: 10px;
   font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
   font-size: 24px;
   text-align: center;
   text-decoration: none;
   background-color: #393740;
-  color: white;
+  color: gainsboro;
   padding: 2px 6px 2px 6px;
   border: 1px solid #393740;
   border-radius: 10px;
+}
+
+.buttonfw {
+  width: 400px;
 }
 
 .button:hover {
