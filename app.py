@@ -44,7 +44,7 @@ def make_session(token=None, state=None, scope=None):
 def index():
     if session.get('auth_choice_made') and session['auth_choice_made'] == True:
         session['auth_choice_made'] = False
-        return render_template("/client/Distant-Horizon.html")
+        return render_template("Distant-Horizon.html")
     else:
         return render_template("Welcome.html")
     
