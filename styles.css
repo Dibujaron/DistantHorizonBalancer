@@ -30,6 +30,12 @@ body {
     padding: 10px;
 }
 
+.aboutbox {
+    align-items: flex-start;
+    padding: 10px;
+    width: 40%;
+}
+
 .mainbox {
     margin-top: 100px
 }
@@ -62,6 +68,27 @@ h4 {
     color: gainsboro;
     background-color: black;
     margin: 5px;
+}
+
+p { 
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;    
+    color: gainsboro;
+    background-color: black;
+}
+
+ul { 
+    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+    font-size: 14px;    
+    color: gainsboro;
+    background-color: black;
+}
+
+li { 
+    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+    font-size: 14px;    
+    color: gainsboro;
+    background-color: black;
 }
 
 .token {
