@@ -6,7 +6,6 @@ function checkReload() {
     Http.send();
     Http.onreadystatechange = (e) => {
         const responseText = Http.responseText;
-        console.log(responseText);
         const data = JSON.parse(responseText);
         const server_build_time = data.time;
         const cached_build_time = getCookie("buildTime");
