@@ -37,7 +37,6 @@ BUILD_TIME = load_build_time()
 def token_updater(token):
     session['oauth2_token'] = token
 
-
 def make_session(token=None, state=None, scope=None):
     return OAuth2Session(
         client_id=OAUTH2_CLIENT_ID,
@@ -141,7 +140,7 @@ def get_server_address():
     
 def clean_pending_logins():
     current_time = time.time()
-    for key in pending_logins.keys():
+    for key in list(pending_logins.keys()):
         val = pending_logins[key]
         if val['expiry'] < current_time:
             del pending_logins[key]
