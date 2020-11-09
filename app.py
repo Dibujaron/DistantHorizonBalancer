@@ -61,7 +61,7 @@ def quick_play():
     
 @app.route('/authenticate')
 def request_auth():
-    if session['oauth2_token']:
+    if 'oauth2_token' in session and session['oauth2_token']:
         session['auth_choice_made'] = True
         return redirect('./')
     discord = make_session(scope=['identify'])
