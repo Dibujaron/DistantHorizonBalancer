@@ -104,8 +104,8 @@ def client_begin_login():
     client_key = generate_login_key()
     if client_key:
         pending_logins[client_key] = {
-            user_info: user,
-            expiry: time.time() + LOGIN_EXPIRY
+            'user_info': user,
+            'expiry': time.time() + LOGIN_EXPIRY
         }        
         return jsonify(logged_in=True, user=user, client_key=client_key, server_address=get_server_address())
     else:
@@ -116,7 +116,7 @@ def server_check_login(client_key):
     clean_pending_logins()
     val = pending_logins[client_key]
     if val:
-        user_data = val.user_info
+        user_data = val['user_info']
         return jsonify(found=True, user=user_data)
     else:
         return jsonify(found=False)
@@ -128,7 +128,7 @@ def clean_pending_logins():
     current_time = time.time()
     for key in pending_logins:
         val = pending_logins[key]
-        if val.expiry < current_time:
+        if val['expiry'] < current_time:
             del pending_logins[key]
             
 def generate_login_key():
