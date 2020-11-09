@@ -130,7 +130,7 @@ def get_server_address():
     
 def clean_pending_logins():
     current_time = time.time()
-    for key in pending_logins:
+    for key in pending_logins.keys():
         val = pending_logins[key]
         if val['expiry'] < current_time:
             del pending_logins[key]
