@@ -10,7 +10,7 @@ function checkReload() {
             const data = JSON.parse(responseText);
             const server_build_time = data.time;
             const cached_build_time = getCookie("buildTime");
-            console.log("server last build time is " + server_build_time, " cached build time is " + cached_build_time); 
+            console.log("server last build time is " + server_build_time + ", cached build time is " + cached_build_time); 
             if(!cached_build_time || server_build_time > cached_build_time){
                 console.log("cached client is out of date, reloading.");
                 setCookie("buildTime", server_build_time);
