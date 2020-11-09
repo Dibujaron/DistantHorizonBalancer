@@ -21,12 +21,19 @@ application = app #for passenger wsgi
 app.debug = True
 app.config['SECRET_KEY'] = OAUTH2_CLIENT_SECRET
 
+BUILD_TIME = get_build_time()
+
 pending_logins = {}
 
 if 'http://' in OAUTH2_REDIRECT_URI:
     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = 'true'
 
-
+def get_build_time():
+    timestr = ""
+    with open('lastbuild.txt', 'r') as file:
+        timestr = file.read()
+    return int(timestr)
+    
 def token_updater(token):
     session['oauth2_token'] = token
 
@@ -124,6 +131,10 @@ def server_check_login(client_key):
     else:
         print("key ", client_key, " not found in pending logins ", jsonify(pending_logins))
         return jsonify(found=False)
+        
+@app.route('/build_time')
+def get_build_time():
+    return jsonify(time=BUILD_TIME)
         
 def get_server_address():
     return SERVER_URL
