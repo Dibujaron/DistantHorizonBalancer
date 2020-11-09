@@ -9,7 +9,7 @@ config.read('config.ini')
 OAUTH2_CLIENT_ID = config['OAUTH2']['ClientID']
 OAUTH2_CLIENT_SECRET = config['OAUTH2']['ClientSecret']
 OAUTH2_REDIRECT_URI = 'http://distant-horizon.io/authresult'
-LOGIN_EXPIRY = config['LOGIN']['Timeout']
+LOGIN_EXPIRY = float(config['LOGIN']['Timeout'])
 SERVER_URL = config['SERVERS']['Address']
 API_BASE_URL = 'https://discordapp.com/api'
 AUTHORIZATION_BASE_URL = API_BASE_URL + '/oauth2/authorize'
