@@ -134,7 +134,7 @@ def clean_pending_logins():
 def generate_login_key():
     tok = session.get('oauth2_token')
     if tok:
-        return hash(tok)
+        return hash(jsonify(token=tok))
     else:
         return None
         
