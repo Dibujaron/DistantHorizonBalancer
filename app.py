@@ -3,6 +3,7 @@ import configparser
 import time
 from flask import Flask, g, session, redirect, request, make_response, jsonify, render_template
 from requests_oauthlib import OAuth2Session
+from struct import pack, unpack
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -134,7 +135,8 @@ def clean_pending_logins():
 def generate_login_key():
     tok = session.get('oauth2_token')
     if tok:
-        return hash(jsonify(token=tok))
+        hash = hash(jsonify(token=tok))
+        return unpack('i', pack('f', hash)[0])
     else:
         return None
         
