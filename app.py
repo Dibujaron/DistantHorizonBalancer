@@ -56,6 +56,7 @@ def index():
 @app.route('/quickplay')
 def quick_play():
     session['auth_choice_made'] = True
+    session.pop('oauth2_token')
     return redirect('./')
     
 @app.route('/authenticate')
