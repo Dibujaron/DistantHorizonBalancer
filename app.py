@@ -21,14 +21,14 @@ application = app #for passenger wsgi
 app.debug = True
 app.config['SECRET_KEY'] = OAUTH2_CLIENT_SECRET
 
-BUILD_TIME = get_build_time()
+BUILD_TIME = load_build_time()
 
 pending_logins = {}
 
 if 'http://' in OAUTH2_REDIRECT_URI:
     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = 'true'
 
-def get_build_time():
+def load_build_time():
     timestr = ""
     with open('lastbuild.txt', 'r') as file:
         timestr = file.read()
