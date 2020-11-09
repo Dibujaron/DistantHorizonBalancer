@@ -115,11 +115,12 @@ def client_begin_login():
 @app.route('/server_check_login/<client_key>')
 def server_check_login(client_key):
     clean_pending_logins()
-    val = pending_logins[client_key]
-    if val:
+    if client_key in pending_logins:
+        val = pending_logins[client_key]
         user_data = val['user_info']
         return jsonify(found=True, user=user_data)
     else:
+        print("key ", client_key, " not found in pending logins ", jsonify(pending_logins))
         return jsonify(found=False)
         
 def get_server_address():
@@ -136,7 +137,7 @@ def generate_login_key():
     tok = session.get('oauth2_token')
     if tok:
         hashval = hash(jsonify(token=tok))
-        return str(unpack('i', pack('f', hashval))[0])
+        return "tok" + str(unpack('i', pack('f', hashval))[0])
     else:
         return None
         
