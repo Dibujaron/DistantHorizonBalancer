@@ -5,17 +5,19 @@ function checkReload() {
     console.log("requesting last build time...");
     Http.send();
     Http.onreadystatechange = (e) => {
-        const responseText = Http.responseText;
-        const data = JSON.parse(responseText);
-        const server_build_time = data.time;
-        const cached_build_time = getCookie("buildTime");
-        console.log("server last build time is " + server_build_time, " cached build time is " + cached_build_time); 
-        if(!cached_build_time || server_build_time > cached_build_time){
-            console.log("cached client is out of date, reloading.");
-            setCookie("buildTime", server_build_time);
-            location.reload(true);
-        } else {
-            console.log("cached client is up to date, no reload required.")
+        if(Http.readyState == 4 && Http.status == 200 && Http.responseText){
+            const responseText = Http.responseText;
+            const data = JSON.parse(responseText);
+            const server_build_time = data.time;
+            const cached_build_time = getCookie("buildTime");
+            console.log("server last build time is " + server_build_time, " cached build time is " + cached_build_time); 
+            if(!cached_build_time || server_build_time > cached_build_time){
+                console.log("cached client is out of date, reloading.");
+                setCookie("buildTime", server_build_time);
+                location.reload(true);
+            } else {
+                console.log("cached client is up to date, no reload required.")
+            }
         }
     }
 }
