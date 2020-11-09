@@ -21,8 +21,6 @@ application = app #for passenger wsgi
 app.debug = True
 app.config['SECRET_KEY'] = OAUTH2_CLIENT_SECRET
 
-BUILD_TIME = load_build_time()
-
 pending_logins = {}
 
 if 'http://' in OAUTH2_REDIRECT_URI:
@@ -34,6 +32,8 @@ def load_build_time():
         timestr = file.read()
     return int(timestr)
     
+BUILD_TIME = load_build_time()
+
 def token_updater(token):
     session['oauth2_token'] = token
 
