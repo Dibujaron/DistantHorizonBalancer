@@ -136,7 +136,7 @@ def generate_login_key():
     tok = session.get('oauth2_token')
     if tok:
         hashval = hash(jsonify(token=tok))
-        return unpack('i', pack('f', hashval))[0]
+        return str(unpack('i', pack('f', hashval))[0])
     else:
         return None
         
