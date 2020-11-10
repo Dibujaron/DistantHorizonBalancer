@@ -139,7 +139,7 @@ def get_build_time():
 def go_to_issues():
     return redirect("https://github.com/Dibujaron/DistantHorizonIssues/issues")
     
-@app.route('report_bug')
+@app.route('/report_bug')
 def report_bug():
     return redirect("https://github.com/Dibujaron/DistantHorizonIssues/issues/new")
     
