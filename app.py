@@ -136,7 +136,7 @@ def get_build_time():
     return jsonify(time=BUILD_TIME)
 
 @app.route('/issues')
-def request_auth():
+def go_to_issues():
     return redirect("https://github.com/Dibujaron/DistantHorizonIssues/issues")
     
 def get_server_address():
