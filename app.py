@@ -134,7 +134,11 @@ def server_check_login(client_key):
 @app.route('/build_time')
 def get_build_time():
     return jsonify(time=BUILD_TIME)
-        
+
+@app.route('/issues')
+def request_auth():
+    return redirect("https://github.com/Dibujaron/DistantHorizonIssues/issues")
+    
 def get_server_address():
     return SERVER_URL
     
