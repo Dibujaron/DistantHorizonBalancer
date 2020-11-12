@@ -15,7 +15,11 @@ function checkReload() {
                 console.log("cached client is out of date, clearing cache.");
                 setCookie("buildTime", server_build_time);
                 localStorage.clear()
-                cache.delete('/')
+                caches.keys().then(function(keyList) {
+                  return Promise.all(keyList.map(function(key) {
+                      return caches.delete(key);
+                  }));
+                })
             } else {
                 console.log("cached client is up to date, no reload required.")
             }
