@@ -8,11 +8,11 @@ body {
     background-repeat: repeat;
 }
 
-.godot #status-progress {
+#status-progress {
 	background-color: #0085E5 !important;
 }
 
-.godot #status-progress-inner {
+#status-progress-inner {
     background-color: #E5BF00 !important;
 }
 .logo-img {
