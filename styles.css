@@ -3,11 +3,6 @@ body {
     background-repeat: repeat;
 }
 
-.godot #status-notice {
-    background-image: url("img/background_flattened.png");
-    background-repeat: repeat;
-}
-
 <div id='status-notice' class='godot' style='display: none;'></div>
 .logo-img {
     width: 128px;
