@@ -14,12 +14,11 @@ function checkReload() {
             if(!cached_build_time || server_build_time > cached_build_time){
                 console.log("cached client is out of date, clearing cache.");
                 setCookie("buildTime", server_build_time);
-                localStorage.clear()
-                caches.keys().then(function(keyList) {
-                  return Promise.all(keyList.map(function(key) {
-                      return caches.delete(key);
-                  }));
-                })
+                window.indexedDB.databases().then((r) => {
+                    for (var i = 0; i < r.length; i++) window.indexedDB.deleteDatabase(r[i].name);
+                }).then(() => {
+                    alert('All data cleared.');
+                });
             } else {
                 console.log("cached client is up to date, no reload required.")
             }
