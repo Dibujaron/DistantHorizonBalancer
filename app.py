@@ -143,6 +143,11 @@ def go_to_issues():
 def report_bug():
     return redirect("https://github.com/Dibujaron/DistantHorizonIssues/issues/new")
     
+@app.after_request
+def add_header(response):
+    response.cache_control.no_cache = True
+    return response
+    
 def get_server_address():
     return SERVER_URL
     
