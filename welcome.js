@@ -17,7 +17,7 @@ function checkReload() {
                 window.indexedDB.databases().then((r) => {
                     for (var i = 0; i < r.length; i++) window.indexedDB.deleteDatabase(r[i].name);
                 }).then(() => {
-                    alert('All data cleared.');
+                    console.log('All data cleared.');
                 });
             } else {
                 console.log("cached client is up to date, no reload required.")
