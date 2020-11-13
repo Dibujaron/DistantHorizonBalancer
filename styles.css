@@ -51,55 +51,56 @@ body {
     margin-top: 100px
 }
 
-h1 {
+html {
     font-family: "Pixelar", "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
-    font-size: 48px;
     color: gainsboro;
+}
+
+h1 {
+    font-size: 52px;
     background-color: black;
+    font-weight: normal;	
 }
 
 h2 {
-    font-family: "Pixelar", "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
     font-size: 24x;
-    color: gainsboro;
     background-color: black;
-
+    font-weight: normal;
 }
 
 h3 {
-    font-family: "Pixelar", "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
     font-size: 18px;
-    color: gainsboro;
     background-color: black;
+    font-weight: normal;
+
 }
 
 h4 {
-    font-family: "Pixelar", "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
     font-size: 16px;
-    color: gainsboro;
     background-color: black;
+    color: gainsboro;
     margin: 5px;
+    font-weight: normal;
 }
 
 p { 
-    font-family: "Pixelar", Helvetica, Arial, sans-serif;
-    font-size: 13px;    
-    color: gainsboro;
+    font-size: 13px; 
     background-color: black;
+    font-weight: normal;
+
 }
 
 ul { 
-    font-family: "Pixelar", "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
     font-size: 14px;    
-    color: gainsboro;
     background-color: black;
+    font-weight: normal;
+
 }
 
-li { 
-    font-family: "Pixelar", "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+li {
     font-size: 14px;    
-    color: gainsboro;
     background-color: black;
+    font-weight: normal;
 }
 
 .token {
