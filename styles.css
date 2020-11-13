@@ -1,3 +1,9 @@
+@font-face {
+    font-family: "Pixelar";
+    src: url("fonts/Pixelar.woff2") format("woff2"),
+         url("fonts/Pixelar.ttf") format("truetype");
+}
+
 body {
     background-image: url("img/background_flattened.png");
     background-repeat: repeat;
@@ -46,14 +52,14 @@ body {
 }
 
 h1 {
-    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+    font-family: "Pixelar", "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
     font-size: 48px;
     color: gainsboro;
     background-color: black;
 }
 
 h2 {
-    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+    font-family: "Pixelar", "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
     font-size: 24x;
     color: gainsboro;
     background-color: black;
@@ -61,14 +67,14 @@ h2 {
 }
 
 h3 {
-    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+    font-family: "Pixelar", "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
     font-size: 18px;
     color: gainsboro;
     background-color: black;
 }
 
 h4 {
-    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+    font-family: "Pixelar", "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
     font-size: 16px;
     color: gainsboro;
     background-color: black;
@@ -76,21 +82,21 @@ h4 {
 }
 
 p { 
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: "Pixelar", Helvetica, Arial, sans-serif;
     font-size: 13px;    
     color: gainsboro;
     background-color: black;
 }
 
 ul { 
-    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+    font-family: "Pixelar", "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
     font-size: 14px;    
     color: gainsboro;
     background-color: black;
 }
 
 li { 
-    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+    font-family: "Pixelar", "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
     font-size: 14px;    
     color: gainsboro;
     background-color: black;
@@ -112,7 +118,7 @@ li {
 
 .button {
   margin: 10px;
-  font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+  font-family: "Pixelar", "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
   font-size: 24px;
   text-align: center;
   text-decoration: none;
