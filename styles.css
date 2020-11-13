@@ -57,9 +57,10 @@ html {
 }
 
 h1 {
-    font-size: 52px;
+    font-size: 64px;
     background-color: black;
     font-weight: normal;	
+    letter-spacing: 5px;
 }
 
 h2 {
