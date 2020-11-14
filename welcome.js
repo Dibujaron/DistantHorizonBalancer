@@ -1,44 +1,176 @@
-function checkReload() {
-    const Http = new XMLHttpRequest()
-    const url = 'http://distant-horizon.io/build_time'
-    Http.open("GET", url);
-    console.log("requesting last build time...");
-    Http.send();
-    Http.onreadystatechange = (e) => {
-        if(Http.readyState == 4 && Http.status == 200 && Http.responseText){
-            const responseText = Http.responseText;
-            const data = JSON.parse(responseText);
-            const server_build_time = data.time;
-            const cached_build_time = getCookie("buildTime");
-            console.log("server last build time is " + server_build_time + ", cached build time is " + cached_build_time); 
-            if(!cached_build_time || server_build_time > cached_build_time){
-                console.log("cached client is out of date, needs clear.");
-            } else {
-                console.log("cached client is up to date, no reload required.")
-            }
+class TextScramble {
+  constructor(el) {
+    this.el = el
+    this.chars = "!<>-_\\/[]{}—=+*^?#________"
+    this.update = this.update.bind(this)
+  }
+  setText(newText) {
+    const oldText = this.el.innerText
+    const length = Math.max(oldText.length, newText.length)
+    const promise = new Promise((resolve) => this.resolve = resolve)
+    this.queue = []
+    for (let i = 0; i < length; i++) {
+      const from = oldText[i] || ""
+      const to = newText[i] || ""
+      const start = Math.floor(Math.random() * 40)
+      const end = start + Math.floor(Math.random() * 40)
+      this.queue.push({ from, to, start, end })
+    }
+    cancelAnimationFrame(this.frameRequest)
+    this.frame = 0
+    this.update()
+    return promise
+  }
+  update() {
+    let output = ""
+    let complete = 0
+    for (let i = 0, n = this.queue.length; i < n; i++) {
+      let { from, to, start, end, char } = this.queue[i]
+      if (this.frame >= end) {
+        complete++
+        output += to
+      } else if (this.frame >= start) {
+        if (!char || Math.random() < 0.28) {
+          char = this.randomChar()
+          this.queue[i].char = char
         }
+        output += `<span class="dud">${char}</span>`
+      } else {
+        output += from
+      }
     }
-}
-
-function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  var expires = "expires="+ d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for(var i = 0; i <ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
+    this.el.innerHTML = output
+    if (complete === this.queue.length) {
+      this.resolve()
+    } else {
+      this.frameRequest = requestAnimationFrame(this.update)
+      this.frame++
     }
   }
-  return "";
+  randomChar() {
+    return this.chars[Math.floor(Math.random() * this.chars.length)]
+  }
+}
+
+Array.prototype.random = function () {
+  return this[Math.floor((Math.random()*this.length))];
+}
+
+const splashes = [
+    [
+        "Neo.",
+        "Sooner or later",
+        "you're going to realize",
+        "just as I did",
+        "that there's a difference",
+        "between knowing the path",
+        "and walking it."
+    ],[
+        "Recommended by 9/10 dentists!"
+    ],[
+        "Gluten Free!"
+    ],[
+        "Internally consistent!"
+    ],[
+        "Now with extra pixels!"
+    ],[
+        "Futuristic!"
+    ],[
+        "Open-source!"
+    ],[
+        "If you want to build a ship...",
+        "don't drum up people to collect wood.",
+        "Don't assign people tasks and work.",
+        "Rather, teach people to long for the endless immensity of the sea..."
+    ],[
+        "Stallman - approved!"
+    ],[
+        "Now with 50% fewer beavers!"
+    ],[
+        "Powered by WebAssembly!"
+    ],[
+        "Powered by Kotlin!"
+    ],[
+        "Built with Godot!"
+    ],[
+        "Somewhat realistic!"
+    ],[
+        "Capitalism!"
+    ],[
+        "Spaceships!"
+    ],[
+        "Artificial Intelligence!",
+        "Blockchain!",
+        "Big Data!",
+        "The Cloud! (tm)",
+        "Digital Transformation!"
+    ],[
+        "Inspired by Firefly!"
+    ],[
+        "Inspired by The Expanse!"
+    ],[
+        "Inspired by StarQuest!"
+    ],[
+        "Inspired by FTL!"
+    ],[
+        "Inspired by KSP!"
+    ],[
+        "Inspired by 'Pirates!'"
+    ],[
+        "Free to play!"
+    ],[
+        "Not P2W!"
+    ],[
+        "No man can step in the same river twice.",
+        "For it is not the same river,",
+        "and he is not the same man."
+    ],[
+        "No woman can step in the same river twice.",
+        "For it is not the same river,",
+        "and she is not the same woman."
+    ],[
+        "We accept the love we think we deserve."
+    ],[
+        "You cannot wake a person who is only pretending to be asleep."
+    ],[
+        "Someday we will build a thinking machine...",
+        "a truly intelligent machine!",
+        "A machine that can see...",
+        "a machine that can speak...",
+        "A machine that will be proud of us."
+    ],[
+        "RESULTS ARE NOT GUARANTEED",
+        "BUT IF YOU ARE NOT PERFECTLY SATISFIED",
+        "YOUR WASTED TIME WILL BE REFUNDED"
+    ]
+]
+
+window.onload = function() {
+    const el = document.getElementById("splashtext")
+    let newangle = Math.random() * 20 - 25
+    console.log(newangle)
+    el.style.transform = "rotate(" + newangle + "deg)"
+    const fx = new TextScramble(el)
+    //let splash = splashes.random()
+    let splash = splashes[splashes.length - 1]
+    let counter = 0
+    const next = () => {
+        if( counter < splash.length ){
+            const dur = (splash.length == 1 || counter < splash.length - 1) ? 1600 : 2400 
+            fx.setText(splash[counter]).then(() => {
+                setTimeout(next, 1600);
+            });
+            counter++;
+        } else {
+            fx.setText("").then(() => {
+                setTimeout(next, 3200);
+                newangle = Math.random() * 20 - 25
+                console.log(newangle)
+                el.style.transform = "rotate(" + newangle + "deg)"
+            });
+            splash = splashes.random()
+            counter=0;
+        }
+    }
+    next()
 }
