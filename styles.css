@@ -34,6 +34,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
 }
 
 .controlsbox {
@@ -141,10 +142,16 @@ li {
 }
 
 #logo {
-  position: absolute;
+  
 }
+
 #splashtext {
   transform: rotate(-20deg);
   color: #E5BF00;
+  height: 50px;
+}
+
+.dud {
+  color #FFFFFF
 }
 

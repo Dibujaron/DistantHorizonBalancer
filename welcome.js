@@ -101,9 +101,7 @@ const splashes = [
     ],[
         "Artificial Intelligence!",
         "Blockchain!",
-        "Big Data!",
-        "The Cloud! (tm)",
-        "Digital Transformation!"
+        "Big Data!"
     ],[
         "Inspired by Firefly!"
     ],[
@@ -121,17 +119,13 @@ const splashes = [
     ],[
         "Not P2W!"
     ],[
-        "No man can step in the same river twice.",
-        "For it is not the same river,",
-        "and he is not the same man."
-    ],[
         "No woman can step in the same river twice.",
         "For it is not the same river,",
         "and she is not the same woman."
     ],[
-        "We accept the love we think we deserve."
-    ],[
-        "You cannot wake a person who is only pretending to be asleep."
+        "No man can step in the same river twice.",
+        "For it is not the same river,",
+        "and he is not the same man."
     ],[
         "Someday we will build a thinking machine...",
         "a truly intelligent machine!",
@@ -147,24 +141,28 @@ const splashes = [
 
 window.onload = function() {
     const el = document.getElementById("splashtext")
-    let newangle = Math.random() * 20 - 25
+    let newangle = Math.random() * 10 - 5
     console.log(newangle)
     el.style.transform = "rotate(" + newangle + "deg)"
     const fx = new TextScramble(el)
-    //let splash = splashes.random()
-    let splash = splashes[splashes.length - 1]
+    let splash = splashes.random()
+    //let splash = splashes[splashes.length - 1]
     let counter = 0
+    let isFirst = true
     const next = () => {
-        if( counter < splash.length ){
+        if ( isFirst ){
+            setTimeout(next, 6400);
+            isFirst = false;
+        } else if( counter < splash.length ){
             const dur = (splash.length == 1 || counter < splash.length - 1) ? 1600 : 2400 
             fx.setText(splash[counter]).then(() => {
-                setTimeout(next, 1600);
+                setTimeout(next, dur);
             });
             counter++;
         } else {
             fx.setText("").then(() => {
-                setTimeout(next, 3200);
-                newangle = Math.random() * 20 - 25
+                setTimeout(next, 6400);
+                newangle = Math.random() * 10 - 5
                 console.log(newangle)
                 el.style.transform = "rotate(" + newangle + "deg)"
             });
