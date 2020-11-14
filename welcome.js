@@ -61,12 +61,11 @@ const splashes = [
         "Neo.",
         "Sooner or later",
         "you're going to realize",
-        "just as I did",
         "that there's a difference",
         "between knowing the path",
         "and walking it."
     ],[
-        "Recommended by 9/10 dentists!"
+        "Recommended by nine out of ten dentists!"
     ],[
         "Gluten Free!"
     ],[
@@ -78,9 +77,6 @@ const splashes = [
     ],[
         "Open-source!"
     ],[
-        "If you want to build a ship...",
-        "don't drum up people to collect wood.",
-        "Don't assign people tasks and work.",
         "Rather, teach people to long for the endless immensity of the sea..."
     ],[
         "Stallman - approved!"
@@ -95,7 +91,7 @@ const splashes = [
     ],[
         "Somewhat realistic!"
     ],[
-        "Capitalism!"
+        "Unethical capitalism!"
     ],[
         "Spaceships!"
     ],[
@@ -136,6 +132,16 @@ const splashes = [
         "RESULTS ARE NOT GUARANTEED",
         "BUT IF YOU ARE NOT PERFECTLY SATISFIED",
         "YOUR WASTED TIME WILL BE REFUNDED"
+    ],[
+        "Han shot first!"
+    ],[
+        "Contains no aliens*!"
+    ],[
+        "Trade!"
+    ],[
+        "Racing! (coming soon)"
+    ],[
+        "Passengers! (coming soon)"
     ]
 ]
 
@@ -151,17 +157,20 @@ window.onload = function() {
     let isFirst = true
     const next = () => {
         if ( isFirst ){
-            setTimeout(next, 6400);
+            setTimeout(next, Math.random() * 3200 + 9200);
             isFirst = false;
         } else if( counter < splash.length ){
-            const dur = (splash.length == 1 || counter < splash.length - 1) ? 1600 : 2400 
+            let dur = 2400;
+            if(splash.length == 1 || counter < splash.length - 1){
+                dur = 1200;
+            }
             fx.setText(splash[counter]).then(() => {
                 setTimeout(next, dur);
             });
             counter++;
         } else {
             fx.setText("").then(() => {
-                setTimeout(next, 6400);
+                setTimeout(next, Math.random() * 3200 + 9200);
                 newangle = Math.random() * 10 - 5
                 console.log(newangle)
                 el.style.transform = "rotate(" + newangle + "deg)"
