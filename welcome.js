@@ -168,10 +168,6 @@ const splashes = [
         "You won't believe how vastly, hugely big it is!",
         "I mean, you may think it's a long way to the supermarket...",
     ],[
-        "The Amulet of Samarkand!",
-        "It was Simon Lovelace's. Now it is yours..",
-        "Soon it will be Simon Lovelace's again."
-    ],[
         "Insanity is contagious."
     ],[
         "Evil...",
@@ -184,6 +180,28 @@ const splashes = [
         "It is the only thing that ever has."
     ],[
         "Contains nuts!"
+    ],[
+        "Nickmiste was an inside job!"
+    ],[
+        "Iocane powder. I swear my life on it!"
+    ],[
+        "If you want sense, you'll have to make it yourself."
+    ],[
+        "We who hold the love and the secret of joy...",
+        "to what punishment have we been sentenced for it?",
+        "and by whom?"
+    ],[
+        "Never make two mistakes at the same time."
+    ],[
+        "See Rock City!"
+    ],[
+        "Visit the flower forests of Keiakar!"
+    ],[
+        "Try the four-dimensional beef!"
+    ],[
+        "Who really founded the Skadi?"
+    ],[
+        "Digital Forge was an inside job!"
     ]
 ]
 
