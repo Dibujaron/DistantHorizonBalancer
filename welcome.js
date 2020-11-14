@@ -202,7 +202,7 @@ window.onload = function() {
     let isFirst = true
     const next = () => {
         if ( isFirst ){
-            setTimeout(next, random(9200, 9200+3200);
+            setTimeout(next, random(9200, 9200+3200));
             isFirst = false;
         } else if( counter < splash.length ){
             let dur = 3200;
@@ -215,7 +215,7 @@ window.onload = function() {
             counter++;
         } else {
             fx.setText("").then(() => {
-                setTimeout(next, random(9200,9200+3200);
+                setTimeout(next, random(9200,9200+3200));
                 newangle = random(-5,5)
                 console.log(newangle)
                 el.style.transform = "rotate(" + newangle + "deg)"
