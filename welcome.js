@@ -187,9 +187,12 @@ const splashes = [
     ]
 ]
 
+function random(min, max){
+    return min + Math.random() * (max - min)
+} 
 window.onload = function() {
     const el = document.getElementById("splashtext")
-    let newangle = Math.random() * 10 - 5
+    let newangle = random(-5,5)
     console.log(newangle)
     el.style.transform = "rotate(" + newangle + "deg)"
     const fx = new TextScramble(el)
@@ -199,7 +202,7 @@ window.onload = function() {
     let isFirst = true
     const next = () => {
         if ( isFirst ){
-            setTimeout(next, Math.random() * 3200 + 9200);
+            setTimeout(next, random(9200, 9200+3200);
             isFirst = false;
         } else if( counter < splash.length ){
             let dur = 3200;
@@ -212,8 +215,8 @@ window.onload = function() {
             counter++;
         } else {
             fx.setText("").then(() => {
-                setTimeout(next, Math.random() * 3200 + 9200);
-                newangle = Math.random() * 10 - 5
+                setTimeout(next, random(9200,9200+3200);
+                newangle = random(-5,5)
                 console.log(newangle)
                 el.style.transform = "rotate(" + newangle + "deg)"
             });
