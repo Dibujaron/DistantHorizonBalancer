@@ -77,7 +77,7 @@ const splashes = [
     ],[
         "Open-source!"
     ],[
-        "Rather, teach people to long for the endless immensity of the sea..."
+        "Rather, teach them to long for the endless immensity of the sea..."
     ],[
         "Stallman - approved!"
     ],[
@@ -97,7 +97,7 @@ const splashes = [
     ],[
         "Artificial Intelligence!",
         "Blockchain!",
-        "Big Data!"
+        "The Cloud (tm)!"
     ],[
         "Inspired by Firefly!"
     ],[
@@ -142,6 +142,48 @@ const splashes = [
         "Racing! (coming soon)"
     ],[
         "Passengers! (coming soon)"
+    ],[
+        "One must always choose the lesser of two weevils!"
+    ],[
+        "Uh... everything's under control!... situation.. normal!",
+        "We, ah, had a slight, ah, weapons.. malfunction....",
+        "But, everything's perfectly all right now!",
+        "We're fine... we're all fine here, now.. Thank you!.. How are you?"
+    ],[
+        "S: Are you Alliance?",
+        "J: Am I 'a lion'?",
+        "S: What?",
+        "J: I don't think of myself as a lion. You might as well, though...",
+        "J: I have a mighty roar!",
+        "S: I said 'Alliance'.",
+        "J: Oh, I thought..."
+    ],[
+        "Objects in space!"
+    ],[
+        "When will Trantor be destroyed?"
+    ],[
+        "Don't panic!"
+    ],[
+        "Space is big. Really big!",
+        "You won't believe how vastly, hugely big it is!",
+        "I mean, you may think it's a long way to the supermarket...",
+    ],[
+        "The Amulet of Samarkand!",
+        "It was Simon Lovelace's. Now it is yours..",
+        "Soon it will be Simon Lovelace's again."
+    ],[
+        "Insanity is contagious."
+    ],[
+        "Evil...",
+        "Sometimes, it was something that stood up and announced itself clearly.",
+        "Like when he was born a Muslim, and the Christians were evil...",
+        "or when he was born Christian, and the Muslims were evil.",
+        "He thanked God, in those lives, for making it so obvious."
+    ],[
+        "Never doubt that a small group of dedicated individuals can change the world.",
+        "It is the only thing that ever has."
+    ],[
+        "Contains nuts!"
     ]
 ]
 
@@ -160,9 +202,9 @@ window.onload = function() {
             setTimeout(next, Math.random() * 3200 + 9200);
             isFirst = false;
         } else if( counter < splash.length ){
-            let dur = 2400;
+            let dur = 3200;
             if(counter < splash.length - 1){
-                dur = 1600;
+                dur = 2400;
             }
             fx.setText(splash[counter]).then(() => {
                 setTimeout(next, dur);
