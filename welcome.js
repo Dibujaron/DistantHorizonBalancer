@@ -161,7 +161,7 @@ window.onload = function() {
             isFirst = false;
         } else if( counter < splash.length ){
             let dur = 2400;
-            if(splash.length == 1 || counter < splash.length - 1){
+            if(counter < splash.length - 1){
                 dur = 1600;
             }
             fx.setText(splash[counter]).then(() => {
