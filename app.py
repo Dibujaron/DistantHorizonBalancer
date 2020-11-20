@@ -113,8 +113,9 @@ def client_begin_login():
     user = discord.get(API_BASE_URL + '/users/@me').json()
     server_addr = get_server_address()
     if user and "username" in user and "discriminator" in user:
-        print("making request.")
-        res = requests.get('http://' + server_addr + '/prep_login/' + user["username"] + user["discriminator"], verify=False)
+        request_url = 'http://' + server_addr + '/prep_login/' + user["username"] + user["discriminator"]
+        print("making GET to ", request_url)
+        res = requests.get(request_url, verify=False)
         if r.status_code == 200:
             return jsonify(logged_in=True, discord_user=user, server_data=r.json(), server_address=server_addr)
         else:
