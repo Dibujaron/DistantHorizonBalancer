@@ -115,9 +115,9 @@ def client_begin_login():
     if user and "username" in user and "discriminator" in user:
         request_url = 'http://' + server_addr + '/prep_login/' + user["username"] + user["discriminator"]
         print("making GET to ", request_url)
-        res = requests.get(request_url, verify=False)
-        if r.status_code == 200:
-            return jsonify(logged_in=True, discord_user=user, server_data=r.json(), server_address=server_addr)
+        server_response = requests.get(request_url, verify=False)
+        if server_response.status_code == 200:
+            return jsonify(logged_in=True, discord_user=user, server_data=server_response.json(), server_address=server_addr)
         else:
             raise ValueError("unable to connect to server at address " + server_addr) 
     else:
