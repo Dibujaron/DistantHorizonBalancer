@@ -113,7 +113,7 @@ def client_begin_login():
     if user and user.username and user.discriminator:
         res = requests.get(server_addr + '/prep_login/' + user.username + user.discriminator)
         if r.status_code == 200:
-            return jsonify(logged_in=True, discord_user=user, server_data=r.json(), server_address=server_addr))
+            return jsonify(logged_in=True, discord_user=user, server_data=r.json(), server_address=server_addr)
         else:
             raise ValueError("unable to connect to server at address " + server_addr) 
     else:
