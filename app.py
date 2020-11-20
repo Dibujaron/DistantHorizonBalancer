@@ -22,6 +22,9 @@ application = app #for passenger wsgi
 app.debug = True
 app.config['SECRET_KEY'] = OAUTH2_CLIENT_SECRET
 
+session = requests.Session()
+session.verify = False
+
 if 'http://' in OAUTH2_REDIRECT_URI:
     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = 'true'
 
