@@ -67,7 +67,7 @@ const splashes = [
     ],[
         "Recommended by nine out of ten dentists!"
     ],[
-        "Gluten Free!"
+        "Gluten free!"
     ],[
         "Internally consistent!"
     ],[
@@ -133,17 +133,15 @@ const splashes = [
         "BUT IF YOU ARE NOT PERFECTLY SATISFIED",
         "YOUR WASTED TIME WILL BE REFUNDED"
     ],[
-        "Han shot first!"
+        "Contains no* aliens!"
     ],[
-        "Contains no aliens*!"
+        "space trading!"
     ],[
-        "Trade!"
+        "Coming soon: Racing!"
     ],[
-        "Racing! (coming soon)"
+        "Coming soon: Passenger transportation!"
     ],[
-        "Passengers! (coming soon)"
-    ],[
-        "One must always choose the lesser of two weevils!"
+        "One must always choose the lesser of two weevils"
     ],[
         "Uh... everything's under control!... situation.. normal!",
         "We, ah, had a slight, ah, weapons.. malfunction....",
@@ -168,16 +166,16 @@ const splashes = [
         "You won't believe how vastly, hugely big it is!",
         "I mean, you may think it's a long way to the supermarket...",
     ],[
-        "Insanity is contagious."
+        "Insanity is contagious"
     ],[
         "Evil...",
         "Sometimes, it was something that stood up and announced itself clearly.",
-        "Like when he was born a Muslim, and the Christians were evil...",
-        "or when he was born Christian, and the Muslims were evil.",
+        "Like when he was a Muslim, and the Christians were evil...",
+        "or when he was a Christian, and the Muslims were evil.",
         "He thanked God, in those lives, for making it so obvious."
     ],[
-        "Never doubt that a small group of dedicated individuals can change the world.",
-        "It is the only thing that ever has."
+        "Never doubt that a small group of dedicated individuals can change the world",
+        "It is the only thing that ever has"
     ],[
         "Contains nuts!"
     ],[
@@ -185,13 +183,13 @@ const splashes = [
     ],[
         "Iocane powder. I swear my life on it!"
     ],[
-        "If you want sense, you'll have to make it yourself."
+        "If you want sense, you'll have to make it yourself"
     ],[
         "We who hold the love and the secret of joy...",
         "to what punishment have we been sentenced for it?",
         "and by whom?"
     ],[
-        "Never make two mistakes at the same time."
+        "Never make two mistakes at the same time"
     ],[
         "See Rock City!"
     ],[
@@ -202,6 +200,48 @@ const splashes = [
         "Who really founded the Skadi?"
     ],[
         "Digital Forge was an inside job!"
+    ],[
+        "Software is magic",
+        "and you might be a wizard"
+    ],[
+        "There are some thing you can't share without ending up liking each other,",
+        "and knocking out a twelve-foot mountain troll is one of them."
+    ],[
+        "If you're ever the smartest person in the room",
+        "find another room"
+    ],[
+        "To truly make an apple pie from scratch",
+        "you must first invent the universe"
+    ],[
+        "If you can't tell",
+        "does it matter?"
+    ],[
+        "What is the nature of your reality"
+    ],[
+        "I've always loved a good Story...",
+        "I believe that stories help us to ennoble ourselves,",
+        "to fix what was broken in us...",
+        "and to help us become the people we dreamed of being.",
+        "They are Lies, that tell us a deeper truth."
+    ],[
+        "Mozart, Beethoven, and Choin never died",
+        "they simply became music"
+    ],[
+        "In Quavara's sandy silence, all alone",
+        "stands a massive Leg, which far off throws",
+        "the only shadow that this desert knows--",
+        "'I am great OZYMANDIAS', says the stone,",
+        "The King of Kings! This mighty city shows",
+        "the wonders of my hand."
+    ],[
+        "This is all very reminiscent of the heyday of communism and socialism",
+        "when the bourgeoisie were hated from both ends;"
+        "by the proles, because the bourgeoisie had all of the money,"
+        "and by the intelligentsia, because of their tendency to spend it on lawn ornaments."
+    ],[
+        "The smallest deed is better than the grandest intention"
+    ],[
+        "A meteorite of pure delight struck the sea without a sound"
     ]
 ]
 
@@ -214,8 +254,8 @@ window.onload = function() {
     console.log(newangle)
     el.style.transform = "rotate(" + newangle + "deg)"
     const fx = new TextScramble(el)
-    let splash = splashes.random()
-    //let splash = splashes[splashes.length - 1]
+    //let splash = splashes.random()
+    let splash = splashes[splashes.length - 1]
     let counter = 0
     let isFirst = true
     const next = () => {

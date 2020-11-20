@@ -1,6 +1,7 @@
 import os
 import configparser
 import time
+import requests
 from flask import Flask, g, session, redirect, request, make_response, jsonify, render_template
 from requests_oauthlib import OAuth2Session
 from struct import pack, unpack
@@ -20,8 +21,6 @@ app = Flask(__name__, template_folder='', static_folder='', static_url_path='')
 application = app #for passenger wsgi
 app.debug = True
 app.config['SECRET_KEY'] = OAUTH2_CLIENT_SECRET
-
-pending_logins = {}
 
 if 'http://' in OAUTH2_REDIRECT_URI:
     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = 'true'
@@ -110,26 +109,15 @@ def me():
 def client_begin_login():
     discord = make_session(token=session.get('oauth2_token'))
     user = discord.get(API_BASE_URL + '/users/@me').json()
-    client_key = generate_login_key()
-    if client_key:
-        pending_logins[client_key] = {
-            'user_info': user,
-            'expiry': time.time() + LOGIN_EXPIRY
-        }        
-        return jsonify(logged_in=True, user=user, client_key=client_key, server_address=get_server_address())
+    server_addr = get_server_address()
+    if user and user.username and user.discriminator:
+        res = requests.get(server_addr + '/prep_login/' + user.username + user.discriminator)
+        if r.status_code == 200:
+            return jsonify(logged_in=True, discord_user=user, server_data=r.json(), server_address=server_addr))
+        else:
+            raise ValueError("unable to connect to server at address " + server_addr) 
     else:
-        return jsonify(logged_in=False, server_address=get_server_address())
-        
-@app.route('/server_check_login/<client_key>')
-def server_check_login(client_key):
-    clean_pending_logins()
-    if client_key in pending_logins:
-        val = pending_logins[client_key]
-        user_data = val['user_info']
-        return jsonify(found=True, user=user_data)
-    else:
-        print("key ", client_key, " not found in pending logins ", jsonify(pending_logins))
-        return jsonify(found=False)
+        return jsonify(logged_in=False, server_address=server_addr)
         
 @app.route('/build_time')
 def get_build_time():
@@ -150,21 +138,6 @@ def add_header(response):
     
 def get_server_address():
     return SERVER_URL
-    
-def clean_pending_logins():
-    current_time = time.time()
-    for key in list(pending_logins.keys()):
-        val = pending_logins[key]
-        if val['expiry'] < current_time:
-            del pending_logins[key]
-            
-def generate_login_key():
-    tok = session.get('oauth2_token')
-    if tok:
-        hashval = hash(jsonify(token=tok))
-        return "tok" + str(unpack('i', pack('f', hashval))[0])
-    else:
-        return None
-        
+
 if __name__ == '__main__':
     app.run()
