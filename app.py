@@ -110,13 +110,14 @@ def client_begin_login():
     discord = make_session(token=session.get('oauth2_token'))
     user = discord.get(API_BASE_URL + '/users/@me').json()
     server_addr = get_server_address()
-    if user and user.username and user.discriminator:
+    if user and username in user and discriminator in user:
         res = requests.get(server_addr + '/prep_login/' + user.username + user.discriminator)
         if r.status_code == 200:
             return jsonify(logged_in=True, discord_user=user, server_data=r.json(), server_address=server_addr)
         else:
             raise ValueError("unable to connect to server at address " + server_addr) 
     else:
+        print("unexpected discord response: ", user)
         return jsonify(logged_in=False, server_address=server_addr)
         
 @app.route('/build_time')
