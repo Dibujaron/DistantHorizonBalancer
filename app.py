@@ -175,7 +175,7 @@ def account_name_from_discord():
     return account_name_from_discord_data(user)
     
 def account_name_from_discord_data(discord_data):
-    if discord_data and "username" in discord_data and "discriminator" in discord_data
+    if discord_data and "username" in discord_data and "discriminator" in discord_data:
         return discord_data["username"] + discord_data["discriminator"]
     else:
         return None
