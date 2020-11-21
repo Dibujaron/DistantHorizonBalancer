@@ -133,12 +133,12 @@ def get_account_data():
     
 @app.route('/create_actor', methods=["POST"])
 def create_actor():
-    with open('/home/centos/logs/flasklog.txt', 'w+') as logfile:
-        request_url = get_server_base_url() + '/account/' + account_name_from_discord() + '/createActor'
-        logfile.write("handling request to create actor, body is " + request.json + "\n")
-        result = requests.post(request_url, data={request.json}, verify=False).json()
-        logfile.write("proxied request to create actor, result is " + result + "\n")
-    return result
+    return jsonify(asdf="asdf")
+    #request_url = get_server_base_url() + '/account/' + account_name_from_discord() + '/createActor'
+    #print("handling request to create actor, body is ", request.json)
+    #result = requests.post(request_url, data={request.json}, verify=False).json()
+    #print("proxied request to create actor, result is ", result)
+    #return result
    
 @app.route('/delete_actor', methods=["POST"])
 def delete_actor():
