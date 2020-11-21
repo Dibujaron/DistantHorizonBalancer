@@ -141,7 +141,7 @@ def create_actor():
             server_data = requests.post(request_url, data={request.json}, verify=False).json()
             return jsonify(success=True, acct_data=server_data)
         else:
-            return jsonify(success=False)
+            return jsonify(success=False, err='user not found')
     except Exception as e:
         return jsonify(success=False, err=traceback.format_exc())
    
