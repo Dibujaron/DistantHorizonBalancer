@@ -115,7 +115,6 @@ def client_begin_login():
     server_addr = get_server_address()
     if user and "username" in user and "discriminator" in user:
         request_url = get_server_base_url() + '/prepLogin/' + account_name_from_discord_data(user)
-        print("making GET to ", request_url)
         server_response = requests.get(request_url, verify=False)
         if server_response.status_code == 200:
             return jsonify(logged_in=True, discord_user=user, server_data=server_response.json(), server_address=server_addr)
@@ -129,19 +128,19 @@ def client_begin_login():
 def get_account_data():
     request_url = get_server_base_url() + '/account/' + account_name_from_discord()
     print("proxying request for account data")
-    return requests.get(request_url, verify=False) #do I have to do something fancy with json here?
+    return requests.get(request_url, verify=False).json()
     
 @app.route('/create_actor', methods=["POST"])
 def create_actor():
     request_url = get_server_base_url() + '/account/' + account_name_from_discord() + '/deleteActor'
     print("proxying request to create actor")
-    return requests.post(request_url, data={request.json}, verify=False) #do I have to do something fancy with json here?
+    return requests.post(request_url, data={request.json}, verify=False).json()
    
 @app.route('/delete_actor', methods=["POST"])
 def delete_actor():
     request_url = get_server_base_url() + '/account/' + account_name_from_discord()
     print("proxying request to delete actor")
-    return requests.post(request_url, data={request.json}, verify=False) #do I have to do something fancy with json here?
+    return requests.post(request_url, data={request.json}, verify=False).json()
     
 @app.route('/build_time')
 def get_build_time():
