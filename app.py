@@ -142,7 +142,7 @@ def create_actor():
    
 @app.route('/delete_actor', methods=["POST"])
 def delete_actor():
-    request_url = ' + '/account/' + account_name_from_discord() + '/deleteActor'
+    request_url = '' + '/account/' + account_name_from_discord() + '/deleteActor'
     print("handling request to delete actor, body is ", request.json)
     result = requests.post(request_url, data={request.json}, verify=False).json()
     print("proxied request to delete actor, result is ", result)
