@@ -133,14 +133,17 @@ def get_account_data():
 @app.route('/create_actor', methods=["POST"])
 def create_actor():
     request_url = get_server_base_url() + '/account/' + account_name_from_discord() + '/deleteActor'
-    print("proxying request to create actor")
-    return requests.post(request_url, data={request.json}, verify=False).json()
+    print("handling request to create actor, body is ", request.json)
+    result = requests.post(request_url, data={request.json}, verify=False).json()
+    print("proxied request to create actor, result is ", result)
+    return result
    
 @app.route('/delete_actor', methods=["POST"])
 def delete_actor():
     request_url = get_server_base_url() + '/account/' + account_name_from_discord()
-    print("proxying request to delete actor")
-    return requests.post(request_url, data={request.json}, verify=False).json()
+    print("handling request to delete actor, body is ", request.json)
+    result = requests.post(request_url, data={request.json}, verify=False).json()
+    print("proxied request to delete actor, result is ", result)
     
 @app.route('/build_time')
 def get_build_time():
