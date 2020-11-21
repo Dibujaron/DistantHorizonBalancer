@@ -132,14 +132,17 @@ def get_account_data():
     return requests.get(request_url, verify=False).json()
     
 @app.route('/create_actor', methods=["POST"])
-def create_actor():
-    acct_name = account_name_from_discord()
-    if acct_name:
-        request_url = 'http://' + SERVER_URL + '/' + SERVER_SECRET + '/account/' + account_name_from_discord() + '/createActor'
-        #server_data = requests.post(request_url, data={request.json}, verify=False).json()
-        return jsonify(success=True, acct_data='')
-    else:
-        return jsonify(success=False)
+def create_actor(): 
+    try:
+        acct_name = account_name_from_discord()
+        if acct_name:
+            request_url = 'http://' + SERVER_URL + '/' + SERVER_SECRET + '/account/' + account_name_from_discord() + '/createActor'
+            #server_data = requests.post(request_url, data={request.json}, verify=False).json()
+            return jsonify(success=True, acct_data='')
+        else:
+            return jsonify(success=False)
+    except Exception as e:
+        return jsonify(success=False, err=traceback.format_exc())
    
 @app.route('/delete_actor', methods=["POST"])
 def delete_actor():
