@@ -136,8 +136,8 @@ def create_actor():
     acct_name = account_name_from_discord()
     if acct_name:
         request_url = 'http://' + SERVER_URL + '/' + SERVER_SECRET + '/account/' + account_name_from_discord() + '/createActor'
-        server_data = requests.post(request_url, data={request.json}, verify=False).json()
-        return jsonify(success=True, acct_data=server_data)
+        #server_data = requests.post(request_url, data={request.json}, verify=False).json()
+        return jsonify(success=True, acct_data='')
     else:
         return jsonify(success=False)
    
