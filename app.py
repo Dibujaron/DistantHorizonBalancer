@@ -133,10 +133,8 @@ def get_account_data():
     
 @app.route('/create_actor', methods=["POST"])
 def create_actor():
-    acct_name = account_name_from_discord()
-    if acct_name:
-        request_url = get_server_base_url() + '/account/' + acct_name + '/createActor'
-        return jsonify(requrl=request_url)
+    request_url = get_server_base_url() + '/account/' + 'asdf' + '/createActor'
+    return jsonify(requrl=request_url)
     #print("handling request to create actor, body is ", request.json)
     #result = requests.post(request_url, data={request.json}, verify=False).json()
     #print("proxied request to create actor, result is ", result)
