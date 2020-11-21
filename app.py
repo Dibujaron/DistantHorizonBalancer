@@ -2,6 +2,7 @@ import os
 import configparser
 import time
 import requests
+import sys
 from flask import Flask, g, session, redirect, request, make_response, jsonify, render_template
 from requests_oauthlib import OAuth2Session
 from struct import pack, unpack
@@ -121,29 +122,29 @@ def client_begin_login():
         else:
             raise ValueError("unable to connect to server at address " + server_addr) 
     else:
-        print("unexpected discord response: ", user)
+        print("unexpected discord response: ", user, file=sys.stderr)
         return jsonify(logged_in=False, server_address=server_addr)
         
 @app.route('/account_data')
 def get_account_data():
     request_url = get_server_base_url() + '/account/' + account_name_from_discord()
-    print("proxying request for account data")
+    print("proxying request for account data", file=sys.stderr)
     return requests.get(request_url, verify=False).json()
     
 @app.route('/create_actor', methods=["POST"])
 def create_actor():
     request_url = get_server_base_url() + '/account/' + account_name_from_discord() + '/deleteActor'
-    print("handling request to create actor, body is ", request.json)
+    print("handling request to create actor, body is ", request.json, file=sys.stderr)
     result = requests.post(request_url, data={request.json}, verify=False).json()
-    print("proxied request to create actor, result is ", result)
+    print("proxied request to create actor, result is ", result, file=sys.stderr)
     return result
    
 @app.route('/delete_actor', methods=["POST"])
 def delete_actor():
     request_url = get_server_base_url() + '/account/' + account_name_from_discord()
-    print("handling request to delete actor, body is ", request.json)
+    print("handling request to delete actor, body is ", request.json, file=sys.stderr)
     result = requests.post(request_url, data={request.json}, verify=False).json()
-    print("proxied request to delete actor, result is ", result)
+    print("proxied request to delete actor, result is ", result, file=sys.stderr)
     
 @app.route('/build_time')
 def get_build_time():
@@ -174,11 +175,14 @@ def account_name_from_discord():
     return account_name_from_discord_data(user)
     
 def account_name_from_discord_data(discord_data):
-    return discord_data["username"] + discord_data["discriminator"]
+    if discord_data and "username" in discord_data and "discriminator" in discord_data
+        return discord_data["username"] + discord_data["discriminator"]
+    else:
+        return None
     
 def get_server_base_url():
     server_info = select_server()
-    return 'http://' + server_info[0] + '/' + server_info[1] 
+    return 'http://' + server_info[0] + '/' + server_info[1]
 
 if __name__ == '__main__':
     app.run()
