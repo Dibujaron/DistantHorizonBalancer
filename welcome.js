@@ -185,12 +185,6 @@ const splashes = [
     ],[
         "If you want sense, you'll have to make it yourself"
     ],[
-        "We who hold the love and the secret of joy...",
-        "to what punishment have we been sentenced for it?",
-        "and by whom?"
-    ],[
-        "Never make two mistakes at the same time"
-    ],[
         "See Rock City!"
     ],[
         "Visit the flower forests of Keiakar!"
@@ -202,13 +196,7 @@ const splashes = [
         "Digital Forge was an inside job!"
     ],[
         "Software is magic",
-        "and you might be a wizard"
-    ],[
-        "There are some thing you can't share without ending up liking each other,",
-        "and knocking out a twelve-foot mountain troll is one of them."
-    ],[
-        "If you're ever the smartest person in the room",
-        "find another room"
+        "and you could be a wizard"
     ],[
         "To truly make an apple pie from scratch",
         "you must first invent the universe"
@@ -217,12 +205,6 @@ const splashes = [
         "does it matter?"
     ],[
         "What is the nature of your reality"
-    ],[
-        "I've always loved a good Story...",
-        "I believe that stories help us to ennoble ourselves,",
-        "to fix what was broken in us...",
-        "and to help us become the people we dreamed of being.",
-        "They are Lies, that tell us a deeper truth."
     ],[
         "Mozart, Beethoven, and Choin never died",
         "they simply became music"
@@ -233,13 +215,6 @@ const splashes = [
         "'I am great OZYMANDIAS', says the stone,",
         "The King of Kings! This mighty city shows",
         "the wonders of my hand."
-    ],[
-        "This is all very reminiscent of the heyday of communism and socialism",
-        "when the bourgeoisie were hated from both ends;"
-        "by the proles, because the bourgeoisie had all of the money,"
-        "and by the intelligentsia, because of their tendency to spend it on lawn ornaments."
-    ],[
-        "The smallest deed is better than the grandest intention"
     ],[
         "A meteorite of pure delight struck the sea without a sound"
     ]
