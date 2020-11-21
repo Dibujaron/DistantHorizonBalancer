@@ -128,23 +128,23 @@ def client_begin_login():
 @app.route('/account_data')
 def get_account_data():
     request_url = get_server_base_url() + '/account/' + account_name_from_discord()
-    print("proxying request for account data")
+    print("proxying request for account data", flush=True)
     return requests.get(request_url, verify=False).json()
     
 @app.route('/create_actor', methods=["POST"])
 def create_actor():
-    request_url = get_server_base_url() + '/account/' + account_name_from_discord() + '/deleteActor'
-    print("handling request to create actor, body is ", request.json)
+    request_url = get_server_base_url() + '/account/' + account_name_from_discord() + '/createActor'
+    print("handling request to create actor, body is ", request.json, flush=True)
     result = requests.post(request_url, data={request.json}, verify=False).json()
-    print("proxied request to create actor, result is ", result)
+    print("proxied request to create actor, result is ", result, flush=True)
     return result
    
 @app.route('/delete_actor', methods=["POST"])
 def delete_actor():
-    request_url = get_server_base_url() + '/account/' + account_name_from_discord()
-    print("handling request to delete actor, body is ", request.json)
+    request_url = get_server_base_url() + '/account/' + account_name_from_discord() + '/deleteActor'
+    print("handling request to delete actor, body is ", request.json, flush=True)
     result = requests.post(request_url, data={request.json}, verify=False).json()
-    print("proxied request to delete actor, result is ", result)
+    print("proxied request to delete actor, result is ", result, flush=True)
     
 @app.route('/build_time')
 def get_build_time():
