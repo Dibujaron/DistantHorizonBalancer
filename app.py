@@ -13,6 +13,7 @@ OAUTH2_CLIENT_SECRET = config['OAUTH2']['ClientSecret']
 OAUTH2_REDIRECT_URI = 'http://distant-horizon.io/authresult'
 LOGIN_EXPIRY = float(config['LOGIN']['Timeout'])
 SERVER_URL = config['SERVERS']['Address']
+SERVER_SECRET = config['SERVERS']['Secret']
 API_BASE_URL = 'https://discordapp.com/api'
 AUTHORIZATION_BASE_URL = API_BASE_URL + '/oauth2/authorize'
 TOKEN_URL = API_BASE_URL + '/oauth2/token'
@@ -107,13 +108,13 @@ def me():
     user = discord.get(API_BASE_URL + '/users/@me').json()
     return jsonify(user=user)
 
-@app.route('/client_start_login')
+@app.route('/client_login')
 def client_begin_login():
     discord = make_session(token=session.get('oauth2_token'))
     user = discord.get(API_BASE_URL + '/users/@me').json()
     server_addr = get_server_address()
     if user and "username" in user and "discriminator" in user:
-        request_url = 'http://' + server_addr + '/prep_login/' + user["username"] + user["discriminator"]
+        request_url = get_server_base_url() + '/prepLogin/' + account_name_from_discord_data(user)
         print("making GET to ", request_url)
         server_response = requests.get(request_url, verify=False)
         if server_response.status_code == 200:
@@ -124,6 +125,24 @@ def client_begin_login():
         print("unexpected discord response: ", user)
         return jsonify(logged_in=False, server_address=server_addr)
         
+@app.route('/account_data')
+def get_account_data():
+    request_url = get_server_base_url() + '/account/' + account_name_from_discord()
+    print("proxying request for account data")
+    return requests.get(request_url, verify=False) #do I have to do something fancy with json here?
+    
+@app.route('/create_actor', methods=["POST"])
+def create_actor():
+    request_url = get_server_base_url() + '/account/' + account_name_from_discord() + '/deleteActor'
+    print("proxying request to create actor")
+    return requests.post(request_url, data={request.json}, verify=False) #do I have to do something fancy with json here?
+   
+@app.route('/delete_actor', methods=["POST"])
+def delete_actor():
+    request_url = get_server_base_url() + '/account/' + account_name_from_discord()
+    print("proxying request to delete actor")
+    return requests.post(request_url, data={request.json}, verify=False) #do I have to do something fancy with json here?
+    
 @app.route('/build_time')
 def get_build_time():
     return jsonify(time=BUILD_TIME)
@@ -142,7 +161,22 @@ def add_header(response):
     return response
     
 def get_server_address():
-    return SERVER_URL
+    return select_server()[0]
+    
+def select_server():
+    return [SERVER_URL, SERVER_SECRET]
+    
+def account_name_from_discord():
+    discord = make_session(token=session.get('oauth2_token'))
+    user = discord.get(API_BASE_URL + '/users/@me').json()
+    return account_name_from_discord_data(user)
+    
+def account_name_from_discord_data(discord_data):
+    return discord_data["username"] + discord_data["discriminator"]
+    
+def get_server_base_url():
+    server_info = select_server()
+    return 'http://' + server_info[0] + '/' + server_info[1] 
 
 if __name__ == '__main__':
     app.run()
