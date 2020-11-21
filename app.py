@@ -133,7 +133,7 @@ def get_account_data():
     
 @app.route('/create_actor', methods=["POST"])
 def create_actor():
-    request_url = get_server_base_url() + '/account/' + 'asdf' + '/createActor'
+    request_url = 'http://' + SERVER_URL + '/' + SERVER_SECRET + '/account/' + 'asdf' + '/createActor'
     return jsonify(requrl=request_url)
     #print("handling request to create actor, body is ", request.json)
     #result = requests.post(request_url, data={request.json}, verify=False).json()
@@ -142,7 +142,7 @@ def create_actor():
    
 @app.route('/delete_actor', methods=["POST"])
 def delete_actor():
-    request_url = get_server_base_url() + '/account/' + account_name_from_discord() + '/deleteActor'
+    request_url = ' + '/account/' + account_name_from_discord() + '/deleteActor'
     print("handling request to delete actor, body is ", request.json)
     result = requests.post(request_url, data={request.json}, verify=False).json()
     print("proxied request to delete actor, result is ", result)
