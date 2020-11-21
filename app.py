@@ -133,19 +133,23 @@ def get_account_data():
     
 @app.route('/create_actor', methods=["POST"])
 def create_actor():
-    request_url = 'http://' + SERVER_URL + '/' + SERVER_SECRET + '/account/' + 'asdf' + '/createActor'
-    return jsonify(requrl=request_url)
-    #print("handling request to create actor, body is ", request.json)
-    #result = requests.post(request_url, data={request.json}, verify=False).json()
-    #print("proxied request to create actor, result is ", result)
-    #return result
+    acct_name = account_name_from_discord()
+    if acct_name:
+        request_url = 'http://' + SERVER_URL + '/' + SERVER_SECRET + '/account/' + account_name_from_discord() + '/createActor'
+        server_data = requests.post(request_url, data={request.json}, verify=False).json()
+        return jsonify(success=True, acct_data=server_data)
+    else:
+        return jsonify(success=False)
    
 @app.route('/delete_actor', methods=["POST"])
 def delete_actor():
-    request_url = '' + '/account/' + account_name_from_discord() + '/deleteActor'
-    print("handling request to delete actor, body is ", request.json)
-    result = requests.post(request_url, data={request.json}, verify=False).json()
-    print("proxied request to delete actor, result is ", result)
+    acct_name = account_name_from_discord()
+    if acct_name:
+        request_url = 'http://' + SERVER_URL + '/' + SERVER_SECRET + '/account/' + account_name_from_discord() + '/deleteActor'
+        server_data = requests.post(request_url, data={request.json}, verify=False).json()
+        return jsonify(success=True, acct_data=server_data)
+    else:
+        return jsonify(success=False)
     
 @app.route('/build_time')
 def get_build_time():
