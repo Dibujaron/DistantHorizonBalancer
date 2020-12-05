@@ -141,7 +141,7 @@ const splashes = [
     ],[
         "Coming soon: Passenger transportation!"
     ],[
-        "One must always choose the lesser of two weevils"
+        "The lesser of two weevils!"
     ],[
         "Uh... everything's under control!... situation.. normal!",
         "We, ah, had a slight, ah, weapons.. malfunction....",
@@ -155,8 +155,6 @@ const splashes = [
         "J: I have a mighty roar!",
         "S: I said 'Alliance'.",
         "J: Oh, I thought..."
-    ],[
-        "Objects in space!"
     ],[
         "When will Trantor be destroyed?"
     ],[
@@ -201,13 +199,7 @@ const splashes = [
         "To truly make an apple pie from scratch",
         "you must first invent the universe"
     ],[
-        "If you can't tell",
-        "does it matter?"
-    ],[
-        "What is the nature of your reality"
-    ],[
-        "Mozart, Beethoven, and Choin never died",
-        "they simply became music"
+        "What is the nature of your reality?"
     ],[
         "In Quavara's sandy silence, all alone",
         "stands a massive Leg, which far off throws",
@@ -217,6 +209,25 @@ const splashes = [
         "the wonders of my hand."
     ],[
         "A meteorite of pure delight struck the sea without a sound"
+    ],[
+        "Everything we hear is an opinion...",
+        "not a fact.",
+        "Everything we see is a perspective...",
+        "not the truth."
+    ],[
+        "It is possible to commit no mistakes and still lose.",
+        "That is not a weakness; that is life."
+    ],[
+        "In great attempts,",
+        "it is glorious even to fail..."
+    ],[
+        "Mozart, Beethoven, and Chopin never died,",
+        "they simply became music..."
+    ],[
+        "If you can't tell",
+        "does it matter?"
+    ],[
+        "On the planet Siskiyu, the atmosphere is 0.072% cbd!"
     ]
 ]
 
@@ -229,8 +240,8 @@ window.onload = function() {
     console.log(newangle)
     el.style.transform = "rotate(" + newangle + "deg)"
     const fx = new TextScramble(el)
-    //let splash = splashes.random()
-    let splash = splashes[splashes.length - 1]
+    let splash = splashes.random()
+    //let splash = splashes[splashes.length - 1]
     let counter = 0
     let isFirst = true
     const next = () => {
