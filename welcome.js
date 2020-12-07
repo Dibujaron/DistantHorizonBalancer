@@ -173,7 +173,7 @@ const splashes = [
         "He thanked God, in those lives, for making it so obvious."
     ],[
         "Never doubt that a small group of dedicated individuals can change the world",
-        "It is the only thing that ever has"
+        "it is the only thing that ever has"
     ],[
         "Contains nuts!"
     ],[
