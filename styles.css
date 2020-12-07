@@ -15,6 +15,7 @@ body {
 }
 
 .logo-img {
+    
 }
 
 .hbox {
@@ -60,8 +61,8 @@ h1 {
     background-color: black;
     font-weight: normal;	
     letter-spacing: 5px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 0px;
+    margin-bottom: 30px;
 }
 
 h2 {
@@ -142,13 +143,12 @@ li {
 }
 
 #logo {
-  
 }
 
 #splashtext {
   transform: rotate(-20deg);
   color: #E5BF00;
-  height: 20px;
+  height: 30px;
 }
 
 .dud {
