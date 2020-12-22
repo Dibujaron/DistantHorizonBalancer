@@ -149,13 +149,16 @@ def create_actor():
    
 @app.route('/delete_actor', methods=["POST"])
 def delete_actor():
-    acct_name = account_name_from_discord()
-    if acct_name:
-        request_url = 'http://' + SERVER_URL + '/' + SERVER_SECRET + '/account/' + account_name_from_discord() + '/deleteActor'
-        server_data = requests.post(request_url, data={request.json}, verify=False).json()
-        return jsonify(success=True, acct_data=server_data)
-    else:
-        return jsonify(success=False)
+    try:
+        acct_name = account_name_from_discord()
+        if acct_name:
+            request_url = 'http://' + SERVER_URL + '/' + SERVER_SECRET + '/account/' + account_name_from_discord() + '/deleteActor'
+            server_data = requests.post(request_url, data={request.json}, verify=False).json()
+            return jsonify(success=True, acct_data=server_data)
+        else:
+            return jsonify(success=False)
+    except Exception as e:
+        return jsonify(success=False, err=traceback.format_exc())
     
 @app.route('/build_time')
 def get_build_time():
