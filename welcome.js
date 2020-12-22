@@ -115,10 +115,6 @@ const splashes = [
     ],[
         "Not P2W!"
     ],[
-        "No woman can step in the same river twice.",
-        "For it is not the same river,",
-        "and she is not the same woman."
-    ],[
         "No man can step in the same river twice.",
         "For it is not the same river,",
         "and he is not the same man."
@@ -231,6 +227,11 @@ const splashes = [
     ],[
         "THERE IS AS YET INSUFFICIENT DATA",
         "FOR A MEANINGFUL ANSWER"
+    ],[
+        "he thought for a moment, and then he said",
+        "with a quiet and powerful voice -- ",
+        "'There will be some'",
+        "'who will understand...'"
     ]
 ]
 
