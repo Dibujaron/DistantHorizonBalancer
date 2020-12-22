@@ -152,11 +152,12 @@ def delete_actor():
     try:
         acct_name = account_name_from_discord()
         if acct_name:
+            req_json_dict = request.json
             request_url = 'http://' + SERVER_URL + '/' + SERVER_SECRET + '/account/' + account_name_from_discord() + '/deleteActor'
-            server_data = requests.post(request_url, data={request.json}, verify=False).json()
+            server_data = requests.post(request_url, data=json.dumps(req_json_dict), verify=False).json()
             return jsonify(success=True, acct_data=server_data)
         else:
-            return jsonify(success=False)
+            return jsonify(success=False, err='user not found')
     except Exception as e:
         return jsonify(success=False, err=traceback.format_exc())
     
