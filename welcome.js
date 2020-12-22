@@ -228,6 +228,9 @@ const splashes = [
         "does it matter?"
     ],[
         "On the planet Siskiyu, the atmosphere is 0.072% cbd!"
+    ],[
+        "THERE IS AS YET INSUFFICIENT DATA",
+        "FOR A MEANINGFUL ANSWER"
     ]
 ]
 
