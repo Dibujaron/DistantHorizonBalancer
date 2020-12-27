@@ -97,9 +97,9 @@ def auth_result():
     response = make_response(redirect('./'))
     return response
 
-@app.route('/controls')
+@app.route('/guide')
 def controls():
-    return render_template("Controls.html")
+    return render_template("Guide.html")
 
 @app.route('/about')
 def about():
