@@ -160,8 +160,8 @@ li {
 }
 
 .tutorial-img {
-  border: /*1px*/ 0.125em solid #393740;
-  border-radius: /*10px*/ 0.625em;    
+  border: /*1px*/ 0.2em solid #393740;
+  border-radius: /*10px*/ 1em;    
 }
 
 .button:hover {
