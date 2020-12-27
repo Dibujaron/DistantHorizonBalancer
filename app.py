@@ -170,7 +170,7 @@ def go_to_issues():
     return redirect("https://github.com/Dibujaron/DistantHorizonIssues/issues")
 
 @app.route('/economy')
-def go_to_issues():
+def go_to_economy():
     return redirect("https://docs.google.com/spreadsheets/d/16FyNIEnfyATNY45AEggCf3WCg6ayvVT-uxJWPeQ1Cls/edit#gid=0")
     
 @app.route('/report_bug')
