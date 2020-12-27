@@ -127,8 +127,8 @@ li {
 
 .token {
   padding: /*2px 6px 2px 6px*/0.125em 0.375em 0.125em 0.375em;
-  margin-left: 0.375em;
-  margin-right: 0.375em;
+  margin-left: 0em;
+  margin-right: 0em;
   background-color: #305c80;
   border: /*1px*/ 0.0625em solid #305c80;
   border-radius: /*10px*/ 0.625em;
