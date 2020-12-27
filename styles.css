@@ -63,6 +63,13 @@ body {
     width: 8em;
 }
 
+.lessmarginbottom {
+    margin-bottom: 0.25em;
+}
+
+.welcomebox {
+    padding: 0.135em;
+}
 html {
     font-family: "Pixelar", "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
     color: gainsboro;
