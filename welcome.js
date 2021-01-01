@@ -77,8 +77,6 @@ const splashes = [
     ],[
         "Open-source!"
     ],[
-        "Rather, teach them to long for the endless immensity of the sea..."
-    ],[
         "Stallman - approved!"
     ],[
         "Now with 50% fewer beavers!"

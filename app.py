@@ -69,7 +69,21 @@ def quick_play():
     session['auth_choice_made'] = True
     if 'oauth2_token' in session: 
         session.pop('oauth2_token')
-    return redirect('./')
+    return redirect('./tutorial_challenge')
+    
+@app.route('/tutorial_challenge')
+def tutorial_challenge():
+    has_tutorial = request.cookies.get('tutorial_done')
+    if has_tutorial:
+        return redirect('./')
+    else:
+        return render_template("TutorialChallenge.html")
+        
+@app.route('/tutorial_challenge_yes')
+def tutorial_challenge_yes():
+    resp = make_response(redirect('./'))
+    resp.set_cookie('tutorial_done', "true")
+    return resp
     
 @app.route('/authenticate')
 def request_auth():
@@ -94,11 +108,15 @@ def auth_result():
         authorization_response=request.url)
     session['oauth2_token'] = token
     session['auth_choice_made'] = True
-    response = make_response(redirect('./'))
+    response = make_response(redirect('./tutorial_challenge'))
     return response
 
 @app.route('/guide')
-def controls():
+def guide():
+    if session.get('auth_choice_made') and session['auth_choice_made'] == True:
+        session['auth_choice_made'] = False
+    resp = make_response(render_template("Guide.html"))
+    resp.set_cookie('tutorial_done', "true")
     return render_template("Guide.html")
 
 @app.route('/about')
