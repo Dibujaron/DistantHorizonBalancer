@@ -15,8 +15,14 @@ OAUTH2_CLIENT_ID = config['OAUTH2']['ClientID']
 OAUTH2_CLIENT_SECRET = config['OAUTH2']['ClientSecret']
 OAUTH2_REDIRECT_URI = 'http://distant-horizon.io/authresult'
 LOGIN_EXPIRY = float(config['LOGIN']['Timeout'])
-SERVER_URL = config['SERVERS']['Address']
-SERVER_SECRET = config['SERVERS']['Secret']
+#SERVER_URL = config['SERVERS']['Address']
+#SERVER_SECRET = config['SERVERS']['Secret']
+
+KNOWN_SERVER_LIST = config.items('SERVERS')
+KNOWN_SERVERS = {}
+for url, secret in KNOWN_SERVER_LIST:
+    KNOWN_SERVERS[secret] = url
+    
 API_BASE_URL = 'https://discordapp.com/api'
 AUTHORIZATION_BASE_URL = API_BASE_URL + '/oauth2/authorize'
 TOKEN_URL = API_BASE_URL + '/oauth2/token'
@@ -25,6 +31,8 @@ app = Flask(__name__, template_folder='', static_folder='', static_url_path='')
 application = app #for passenger wsgi
 app.debug = True
 app.config['SECRET_KEY'] = OAUTH2_CLIENT_SECRET
+
+active_servers = {}
 
 requests.Session().verify = False
 
@@ -96,7 +104,6 @@ def request_auth():
     ultimate_url = authorization_url + '&prompt=none'
     return redirect(ultimate_url)
 
-
 @app.route('/authresult')
 def auth_result():
     if request.values.get('error'):
@@ -133,21 +140,26 @@ def me():
 def client_begin_login():
     discord = make_session(token=session.get('oauth2_token'))
     user = discord.get(API_BASE_URL + '/users/@me').json()
-    server_addr = get_server_address()
-    if user and "username" in user and "discriminator" in user:
-        request_url = get_server_base_url() + '/prepLogin/' + account_name_from_discord_data(user)
-        server_response = requests.get(request_url, verify=False)
-        if server_response.status_code == 200:
-            return jsonify(logged_in=True, discord_user=user, server_data=server_response.json(), server_address=server_addr)
-        else:
-            raise ValueError("unable to connect to server at address " + server_addr) 
+    serv = select_server()
+    if not serv:
+        return jsonify(logged_in=False, error='no servers registered')
     else:
-        print("unexpected discord response: ", user)
-        return jsonify(logged_in=False, server_address=server_addr)
+        server_addr = serv[0]
+        if user and "username" in user and "discriminator" in user:
+            request_url = 'http://' + serv[0] + '/' + serv[1] + '/prepLogin/' + account_name_from_discord_data(user)
+            server_response = requests.get(request_url, verify=False)
+            if server_response.status_code == 200:
+                return jsonify(logged_in=True, discord_user=user, server_data=server_response.json(), server_address=server_addr)
+            else:
+                raise ValueError("unable to connect to server at address " + server_addr) 
+        else:
+            print("unexpected discord response: ", user)
+            return jsonify(logged_in=False, server_address=server_addr)
         
 @app.route('/account_data')
 def get_account_data():
-    request_url = get_server_base_url() + '/account/' + account_name_from_discord()
+    serv = select_server()
+    request_url = 'http://' + serv[0] + '/' + serv[1] + '/account/' + account_name_from_discord()
     print("proxying request for account data")
     return requests.get(request_url, verify=False).json()
     
@@ -157,9 +169,13 @@ def create_actor():
         acct_name = account_name_from_discord()
         if acct_name:
             req_json_dict = request.json
-            request_url = 'http://' + SERVER_URL + '/' + SERVER_SECRET + '/account/' + account_name_from_discord() + '/createActor'
-            server_data = requests.post(request_url, data=json.dumps(req_json_dict), verify=False).json()
-            return jsonify(success=True, acct_data=server_data)
+            serv = select_server()
+            if not serv:
+                return jsonify(success=False, err='no servers active')
+            else:
+                request_url = 'http://' + serv[0] + '/' + serv[1] + '/account/' + account_name_from_discord() + '/createActor'
+                server_data = requests.post(request_url, data=json.dumps(req_json_dict), verify=False).json()
+                return jsonify(success=True, acct_data=server_data)
         else:
             return jsonify(success=False, err='user not found')
     except Exception as e:
@@ -171,9 +187,13 @@ def delete_actor():
         acct_name = account_name_from_discord()
         if acct_name:
             req_json_dict = request.json
-            request_url = 'http://' + SERVER_URL + '/' + SERVER_SECRET + '/account/' + account_name_from_discord() + '/deleteActor'
-            server_data = requests.post(request_url, data=json.dumps(req_json_dict), verify=False).json()
-            return jsonify(success=True, acct_data=server_data)
+            serv = select_server()
+            if not serv:
+                return jsonify(success=False, err='no servers active')
+            else:
+                request_url = 'http://' + serv[0] + '/' + serv[1] + '/account/' + account_name_from_discord() + '/deleteActor'
+                server_data = requests.post(request_url, data=json.dumps(req_json_dict), verify=False).json()
+                return jsonify(success=True, acct_data=server_data)
         else:
             return jsonify(success=False, err='user not found')
     except Exception as e:
@@ -200,11 +220,35 @@ def add_header(response):
     response.cache_control.no_cache = True
     return response
     
-def get_server_address():
-    return select_server()[0]
-    
+
+@app.route('/server_heartbeat', methods=["POST"])
+def server_heartbeat():
+    try:
+        payload = request.json
+        server_secret = payload.secret
+        server_count = payload.player_count
+        server_limit = payload.server_limit
+        if server_secret in KNOWN_SERVERS:
+            server_url = KNOWN_SERVERS[server_secret]
+            active_servers[server_secret] = {
+                'url': server_url,
+                'active_players': server_count,
+                'max_players': server_limit,
+                'last_heartbeat': time.time()
+            }
+            return jsonify(success=True, num_servers=len(active_servers))
+        else:
+            return jsonify(success=False, err='server is not registered as a known server.')
+    except Exception as e:
+        return jsonify(success=False, err=traceback.format_exc())   
+        
 def select_server():
-    return [SERVER_URL, SERVER_SECRET]
+    for serv_secret in active_servers:
+        serv_data = active_servers[serv_secret]
+        #todo balancing algorithm, right now we just return the first one.
+        serv_url = serv_data.url
+        return [serv_url, serv_secret]
+    return None
     
 def account_name_from_discord():
     discord = make_session(token=session.get('oauth2_token'))
@@ -216,10 +260,6 @@ def account_name_from_discord_data(discord_data):
         return discord_data["username"] + discord_data["discriminator"]
     else:
         return None
-    
-def get_server_base_url():
-    server_info = select_server()
-    return 'http://' + server_info[0] + '/' + server_info[1]
 
 if __name__ == '__main__':
     app.run()
