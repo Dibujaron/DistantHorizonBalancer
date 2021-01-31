@@ -116,7 +116,7 @@ def guide():
     if session.get('auth_choice_made') and session['auth_choice_made'] == True:
         session['auth_choice_made'] = False
     resp = make_response(render_template("Guide.html"))
-    resp.set_cookie('tutorial_done', "true")
+    resp.set_cookie('tutorial_done', "true", max_age=60*60*24*365)
     return render_template("Guide.html")
 
 @app.route('/about')
