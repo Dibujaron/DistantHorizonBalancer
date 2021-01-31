@@ -154,7 +154,7 @@ def client_begin_login():
                 raise ValueError("unable to connect to server at address " + server_addr) 
         else:
             print("unexpected discord response: ", user)
-            return jsonify(logged_in=False, server_address=server_addr)
+            return jsonify(logged_in=False, server_address="unexpected discord response: " + user)
         
 @app.route('/account_data')
 def get_account_data():
