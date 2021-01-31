@@ -243,12 +243,13 @@ def server_heartbeat():
         return jsonify(success=False, err=traceback.format_exc())   
         
 def select_server():
-    for serv_secret in active_servers:
-        serv_data = active_servers[serv_secret]
-        #todo balancing algorithm, right now we just return the first one.
-        serv_url = serv_data.url
-        return [serv_url, serv_secret]
-    return None
+    return [SERVER_URL, SERVER_SECRET]
+   #for serv_secret in active_servers:
+    #    serv_data = active_servers[serv_secret]
+    #    #todo balancing algorithm, right now we just return the first one.
+    #    serv_url = serv_data.url
+    #    return [serv_url, serv_secret]
+    #return None
     
 def account_name_from_discord():
     discord = make_session(token=session.get('oauth2_token'))
