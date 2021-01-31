@@ -15,8 +15,8 @@ OAUTH2_CLIENT_ID = config['OAUTH2']['ClientID']
 OAUTH2_CLIENT_SECRET = config['OAUTH2']['ClientSecret']
 OAUTH2_REDIRECT_URI = 'http://distant-horizon.io/authresult'
 LOGIN_EXPIRY = float(config['LOGIN']['Timeout'])
-#SERVER_URL = config['SERVERS']['Address']
-#SERVER_SECRET = config['SERVERS']['Secret']
+SERVER_URL = config['SERVERS']['Address']
+SERVER_SECRET = config['SERVERS']['Secret']
 
 KNOWN_SERVER_LIST = config.items('SERVERS')
 KNOWN_SERVERS = {}
