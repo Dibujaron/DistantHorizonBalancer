@@ -82,7 +82,7 @@ def tutorial_challenge():
 @app.route('/tutorial_challenge_yes')
 def tutorial_challenge_yes():
     resp = make_response(redirect('./'))
-    resp.set_cookie('tutorial_done', "true")
+    resp.set_cookie('tutorial_done', "true",max_age=60*60*24*365)
     return resp
     
 @app.route('/authenticate')
