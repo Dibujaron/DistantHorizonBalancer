@@ -225,9 +225,9 @@ def add_header(response):
 def server_heartbeat():
     try:
         payload = request.json
-        server_secret = payload.secret
-        server_count = payload.player_count
-        server_limit = payload.server_limit
+        server_secret = payload['secret']
+        server_count = payload['player_count']
+        server_limit = payload['server_limit']
         if server_secret in KNOWN_SERVERS:
             server_url = KNOWN_SERVERS[server_secret]
             active_servers[server_secret] = {
