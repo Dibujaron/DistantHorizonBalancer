@@ -238,7 +238,7 @@ def server_heartbeat():
             }
             return jsonify(success=True, num_servers=len(active_servers))
         else:
-            return jsonify(success=False, err='server is not registered as a known server. ' + KNOWN_SERVERS)
+            return jsonify(success=False, err='server is not registered as a known server. ' + str(KNOWN_SERVERS))
     except Exception as e:
         return jsonify(success=False, err=traceback.format_exc())   
         
