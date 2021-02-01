@@ -18,7 +18,7 @@ LOGIN_EXPIRY = float(config['LOGIN']['Timeout'])
 SERVER_URL = config['SERVERS']['Address']
 SERVER_SECRET = config['SERVERS']['Secret']
 
-KNOWN_SERVER_LIST = config.items('SERVERS')
+KNOWN_SERVER_LIST = config.items('SERVER_REGISTRY')
 KNOWN_SERVERS = {}
 for url, secret in KNOWN_SERVER_LIST:
     KNOWN_SERVERS[secret] = url
