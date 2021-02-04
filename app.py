@@ -155,7 +155,7 @@ def client_begin_login():
                     raise ValueError("unable to connect to server at address " + server_addr) 
             else:
                 print("unexpected discord response: ", user)
-                return jsonify(logged_in=False, server_address="unexpected discord response: " + str(user))
+                return jsonify(logged_in=False, discord_user=None, server_address=server_addr)
     except Exception as e:
         return jsonify(success=False, err=traceback.format_exc())
         
