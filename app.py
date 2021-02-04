@@ -138,23 +138,26 @@ def me():
 
 @app.route('/client_login')
 def client_begin_login():
-    discord = make_session(token=session.get('oauth2_token'))
-    user = discord.get(API_BASE_URL + '/users/@me').json()
-    serv = select_server()
-    if not serv:
-        return jsonify(logged_in=False, error='no servers registered')
-    else:
-        server_addr = serv[0]
-        if user and "username" in user and "discriminator" in user:
-            request_url = 'http://' + serv[0] + '/' + serv[1] + '/prepLogin/' + account_name_from_discord_data(user)
-            server_response = requests.get(request_url, verify=False)
-            if server_response.status_code == 200:
-                return jsonify(logged_in=True, discord_user=user, server_data=server_response.json(), server_address=server_addr)
-            else:
-                raise ValueError("unable to connect to server at address " + server_addr) 
+    try:
+        serv = select_server()
+        if not serv:
+            return jsonify(logged_in=False, error='no servers registered')
         else:
-            print("unexpected discord response: ", user)
-            return jsonify(logged_in=False, server_address="unexpected discord response: " + user)
+            server_addr = serv[0]
+            discord = make_session(token=session.get('oauth2_token'))
+            user = discord.get(API_BASE_URL + '/users/@me').json()
+            if user and "username" in user and "discriminator" in user:
+                request_url = 'http://' + serv[0] + '/' + serv[1] + '/prepLogin/' + account_name_from_discord_data(user)
+                server_response = requests.get(request_url, verify=False)
+                if server_response.status_code == 200:
+                    return jsonify(logged_in=True, discord_user=user, server_data=server_response.json(), server_address=server_addr)
+                else:
+                    raise ValueError("unable to connect to server at address " + server_addr) 
+            else:
+                print("unexpected discord response: ", user)
+                return jsonify(logged_in=False, server_address="unexpected discord response: " + user)
+    except Exception as e:
+        return jsonify(success=False, err=traceback.format_exc())
         
 @app.route('/account_data')
 def get_account_data():
@@ -241,6 +244,16 @@ def server_heartbeat():
             return jsonify(success=False, err='server is not registered as a known server.')
     except Exception as e:
         return jsonify(success=False, err=traceback.format_exc())   
+        
+@app.route('ecodata')
+def get_eco_csv():
+    serv = select_server()
+    if not serv:
+        return jsonify(success=False, err='no servers active')
+    else:
+        request_url = 'http://' + serv[0] + '/ecodata'
+        server_data = requests.get(request_url).text
+        return server_data
         
 def select_server():
     return [SERVER_URL, SERVER_SECRET]
