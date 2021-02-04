@@ -251,7 +251,7 @@ def get_eco_csv():
     if not serv:
         return jsonify(success=False, err='no servers active')
     else:
-        request_url = 'http://' + serv[0] + '/ecodata'
+        request_url = 'http://' + serv[0] + '/ecoData'
         server_data = requests.get(request_url).text
         return server_data
         
