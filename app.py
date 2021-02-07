@@ -251,6 +251,12 @@ def server_heartbeat():
     except Exception as e:
         return jsonify(success=False, err=traceback.format_exc())   
         
+@app.route('/server_info')
+def server_info():
+    try:
+        return jsonify(success=True, active_servers=active_servers)
+    except Exception as e:
+        return jsonify(success=False, err=traceback.format_exc())   
 @app.route('/ecodata')
 def get_eco_csv():
     serv = select_server()
