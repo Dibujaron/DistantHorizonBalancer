@@ -254,9 +254,13 @@ def server_heartbeat():
 @app.route('/server_info')
 def server_info():
     try:
-        return jsonify(success=True, active_servers=active_servers)
+        server_list = []
+        for serv_secret in active_servers:
+            server_list.append(active_servers[serv_secret])
+        return jsonify(success=True, server_list=server_list)
     except Exception as e:
-        return jsonify(success=False, err=traceback.format_exc())   
+        return jsonify(success=False, err=traceback.format_exc())
+        
 @app.route('/ecodata')
 def get_eco_csv():
     serv = select_server()
