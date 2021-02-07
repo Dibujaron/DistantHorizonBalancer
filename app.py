@@ -161,10 +161,16 @@ def client_begin_login():
         
 @app.route('/account_data')
 def get_account_data():
-    serv = select_server()
-    request_url = 'http://' + serv[0] + '/' + serv[1] + '/account/' + account_name_from_discord()
-    print("proxying request for account data")
-    return requests.get(request_url, verify=False).json()
+    try:
+        serv = select_server()
+        if not serv:
+                return jsonify(logged_in=False, error='no servers registered')
+        else:
+            request_url = 'http://' + serv[0] + '/' + serv[1] + '/account/' + account_name_from_discord()
+            print("proxying request for account data")
+            return requests.get(request_url, verify=False).json()
+    except Exception as e:
+        return jsonify(logged_in=False, err=traceback.format_exc())
     
 @app.route('/create_actor', methods=["POST"])
 def create_actor(): 
@@ -257,12 +263,12 @@ def get_eco_csv():
         
 def select_server():
     return [SERVER_URL, SERVER_SECRET]
-   #for serv_secret in active_servers:
-    #    serv_data = active_servers[serv_secret]
-    #    #todo balancing algorithm, right now we just return the first one.
-    #    serv_url = serv_data.url
-    #    return [serv_url, serv_secret]
-    #return None
+    for serv_secret in active_servers:
+        serv_data = active_servers[serv_secret]
+        #todo balancing algorithm, right now we just return the first one.
+        serv_url = serv_data.url
+        return [serv_url, serv_secret]
+    return None
     
 def account_name_from_discord():
     discord = make_session(token=session.get('oauth2_token'))
