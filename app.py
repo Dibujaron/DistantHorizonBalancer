@@ -284,7 +284,7 @@ def sq_world_files(world):
         worlds = ['arenstad', 'arkado', 'avaquo', 'beskytt', 'canora', 'cueneva', 'erilon', 'feldost', 'holo', 'hylon', 'izifo', 'jurion', 'kattadi', 'mardos', 'nefizar', 'quillon', 'radawii', 'rallov', 'sabaka', 'space', 'tyder', 'xira', 'yavar']
         if world in worlds:
             filename = world + '.zip'
-            return send_from_directory(directory='sq/world_files', filename=filename)
+            return send_from_directory(directory='/home/starquest/world_files', filename=filename)
         else:
             return None
     except Exception as e:
