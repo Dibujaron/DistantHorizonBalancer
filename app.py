@@ -270,7 +270,26 @@ def get_eco_csv():
         request_url = 'http://' + serv[0] + '/ecoData'
         server_data = requests.get(request_url).text
         return server_data
-        
+    
+@app.route('/sq/world_downloads')
+def sq_world_downloads():
+    try:
+        return render_template("sq/world_downloads.html")
+    except Exception as e:
+        return None
+    
+@app.route('/sq/world_files/<string:world>')
+def sq_world_files(world):
+    try:
+        worlds = ['arenstad', 'arkado', 'avaquo', 'beskytt', 'canora', 'cueneva', 'erilon', 'feldost', 'holo', 'hylon', 'izifo', 'jurion', 'kattadi', 'mardos', 'nefizar', 'quillon', 'radawii', 'rallov', 'sabaka', 'space', 'tyder', 'xira', 'yavar']
+        if world in worlds:
+            filename = world + '.zip'
+            return send_from_directory(directory='sq/world_files', filename=filename)
+        else:
+            return None
+    except Exception as e:
+            return None
+    
 def select_server():
     return [SERVER_URL, SERVER_SECRET]
     for serv_secret in active_servers:
