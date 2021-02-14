@@ -276,7 +276,7 @@ def sq_world_downloads():
     try:
         return render_template("sq/world_downloads.html")
     except Exception as e:
-        return None
+        return jsonify(success=False, err=traceback.format_exc())
     
 @app.route('/sq/world_files/<string:world>')
 def sq_world_files(world):
@@ -286,9 +286,9 @@ def sq_world_files(world):
             filename = world + '.zip'
             return send_from_directory(directory='/home/starquest/world_files', filename=filename)
         else:
-            return None
+            return jsonify(success=False, err='invalid world')
     except Exception as e:
-            return None
+            return jsonify(success=False, err=traceback.format_exc())
     
 def select_server():
     return [SERVER_URL, SERVER_SECRET]
