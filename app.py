@@ -136,6 +136,12 @@ def me():
     user = discord.get(API_BASE_URL + '/users/@me').json()
     return jsonify(user=user)
 
+@app.route('/GenerateCatalogView', methods=["POST"])
+def generate_catalog_view_test():
+    req_json_dict = request.json
+    print(req_json_dict)
+    return jsonify(success=True, createdVirtualDataSetID="211.7450")
+    
 @app.route('/client_login')
 def client_begin_login():
     try:
