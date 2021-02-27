@@ -200,7 +200,7 @@ li {
 
 .crawl {
   position: relative;
-  animation: crawl 200s linear;
+  animation: crawl 400s linear;
 }
 
 .crawl p {
