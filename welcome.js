@@ -230,6 +230,28 @@ const splashes = [
         "with a quiet and powerful voice -- ",
         "'There will be some'",
         "'who will understand...'"
+    ],[
+        "A Frisian proverb:",
+        "God created the Earth,",
+        "but the Dutch created the Netherlands"
+    ],[
+        "I think it's impossible to really understand someone...",
+        "what they want, what they believe...",
+        "and not love them the way they love themselves."
+    ],[
+        "If your boss demands loyalty,",
+        "give him integrity.",
+        "If your boss demands integrity,",
+        "give him loyalty."
+    ],[
+        "Giraffes do not argue with Rabbits...",
+        "about the shape of the top of a tree."
+    ],[
+        "Never make two mistakes at the same time."
+    ],[
+        "Measure twice, cut once."
+    ],[
+        "The smallest deed is better than the grandest intention."
     ]
 ]
 
