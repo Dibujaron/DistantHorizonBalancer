@@ -252,6 +252,22 @@ const splashes = [
         "Measure twice, cut once."
     ],[
         "The smallest deed is better than the grandest intention."
+    ],[
+        "Ingredients for true magic:",
+        "a) at least one circle",
+        "b) a really good name",
+        "c) a spark",
+        "d) and good intentions.",
+        "+ a dash of chaos to taste"
+    ],[
+        "Inspired by The West Wing!",
+        "Only seasons 2-4 tho."
+    ],[
+        "points to make a line: 2",
+        "lines to make a square: 4",
+        "squares to make a cube: 6",
+        "cubes to make a ???: 8",
+        "..."
     ]
 ]
 

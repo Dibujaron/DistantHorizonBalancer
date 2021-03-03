@@ -1,0 +1,4 @@
+Number of points to make a line: 2
+Number of lines to make a square: 4
+Number of squares to make a cube: 6
+Number of cubes to make a tesseract: 8
