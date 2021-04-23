@@ -191,7 +191,7 @@ li {
 .starwars {
   display: flex;
   justify-content: center;
-  perspective: 1000px;
+  perspective: 1500px;
   color: #feda4a;
   letter-spacing: 1px;
   line-height: 150%;
