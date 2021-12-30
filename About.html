@@ -11,32 +11,31 @@
 </head>
 
 
-<body class="starwarsouter">
-  <div class="fade"></div>
-  <div class="hbox starwars">
-    <div class="vbox mainbox crawl starwarsp">
+<body>
+  <div class="hbox">
+    <div class="vbox mainbox">
       <div class="vbox dark aboutbox">
           <h3>Gameplay</h3>
           <p>
           This is a game about flying a trading spaceship in a realistic universe.
-          It is hard science-fiction; the future of Distant Horizon requires no massive leaps in
-          technology. What is represented is one of humanity's possible futures. Many space games
-          seem to use atmospheric, airplane physics. Others use naval combat models. Distant Horizon
-          is an attempt to demonstrate what realistic space travel would be like, and to show that you
-          don't have to diverge from reality for interesting space gameplay to emerge. Compared to 
-          the exciting futures presented in science-fiction, the true possibilities of our future 
-          sometimes seem dull. Distant Horizon is an attempt to demonstrate that the true future
-          may be just as exciting as the fictional.
+          It is hard science-fiction: the future of Distant Horizon requires no massive leaps in
+          technology. The game world represents one of humanity's possible futures. Many space games
+          use atmospheric airplane physics for flight. Others use naval models. Distant Horizon uses
+		  a true spaceflight model; itis an attempt to demonstrate what realistic space travel would
+		  be like, and to show that you don't have to diverge from reality for interesting space 
+		  gameplay to emerge. Compared to the exciting futures presented in science-fiction, the
+		  true possibilities of our future sometimes seem dull. Distant Horizon is an attempt to
+		  demonstrate that the true futuremay be just as exciting as the fictional.
           </p>
       </div>
       <div class="vbox dark aboutbox">
           <h3>World</h3>
           <p>
-          Distant Horizon is set in the fictional Regalis Deep (TIC 168789840), a rare hextuple star system.
-          This region of space was colonized by human generation ships departing from earth around 
-          2700. Minimal contact has been had with Earth since that time. No sentient aliens are known to exist;
-          while two worlds in Regalis Deep have native (silicon-based) life, neither has developed any with 
-          human-tier intelligence. Humans have colonized these two worlds and have terraformed many more. 
+          Distant Horizon is set in Regalis Deep (TIC 168789840), a rare hextuple star system.
+          This region of space was colonized by human generation ships departing from earth in 
+          2712. Minimal contact has been had with Earth since that time. No sentient aliens are known to exist;
+          while two worlds in Regalis Deep have native silicon-based life, neither developed any life with 
+          human-level intelligence. Humans have colonized these two worlds and have terraformed many more. 
           </p>
           <p>
           The planets of Regalis Deep are close enough together to allow travel between them to take place
@@ -45,11 +44,11 @@
           </p>
           <p>
           The colonization ships dispatched to Regalis were primarily funded by the Federated States of
-          North America (FSA), the People's Republic of East Asia (P.R.E.A.), and the Union of South Asian Nations (USN).
-          While a few planets have achieved internal planetwide government, no stable interplanetary
-          government has emerged. A few attempts have been made, but because communication between planets
-          takes weeks at best, only very loose alliances can be formed. While some governments are more
-          powerful than others, no single nation has achieved hegemony.
+          North America (FSA), the People's Republic of East Asia (P.R.E.A.), and the Union of South Asian Nations (SAN).
+          While a few planets have stable planetwide governments, no stable interplanetary government has emerged.
+		  A few governments have attempted to rule several worlds at once, but because communication between planets
+          takes weeks at best, only loose alliances can be formed. While some governments are more
+          powerful than others, no single nation currently holds hegemony over the others.
           </p>
       </div>
       <br>
@@ -58,7 +57,7 @@
           <p>
           The game client is written in <a href="https://godotengine.org/">Godot Engine</a>, 
           compiling to WebAssembly, with a multiplayer server written in Kotlin. A small web server 
-          application, written in Python/Flask, serves this static site.
+          application, written in Python/Flask, serves this static site and load balances between servers.
           </p>
           <p>
           All of Distant Horizon's code, except for certain key configuration files, is open sourced
@@ -67,18 +66,16 @@
           </p>
           <p>The repositories are here:</p>
           <ul>
-            <li><a href="https://github.com/Dibujaron/DistantHorizonServer">Kotlin Server</a></li>
-            <li><a href="https://github.com/Dibujaron/DistantHorizonClient">Godot Client</a></li>
-            <li><a href="https://github.com/Dibujaron/DistantHorizonBalancer">Static Site</a></li>
-            <li><a href="https://github.com/Dibujaron/DistantHorizonScripts">Build Scripts</a></li>
+            <li><p><a href="https://github.com/Dibujaron/DistantHorizonServer">Kotlin Server</a></p></li>
+            <li><p><a href="https://github.com/Dibujaron/DistantHorizonClient">Godot Client</a></p></li>
+            <li><p><a href="https://github.com/Dibujaron/DistantHorizonBalancer">Static Site</a></p></li>
+            <li><p><a href="https://github.com/Dibujaron/DistantHorizonScripts">Build Scripts</a></p></li>
           </ul>
       </div>
       <br>
-      <h2>Distant Horizon's code is publicly available <a href="https://github.com/Dibujaron/DistantHorizonServer"/>here</a>.</h2>
-      <br>
-    <br>
-    <br>
-    <a class="button" href="./">Home</a>
+	  <br>
+	  <br>
+	  <a class="button" href="./">Home</a>
     </div>
   </div>
 </body>
